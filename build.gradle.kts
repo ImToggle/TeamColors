@@ -28,21 +28,27 @@ repositories {
     }
     strictMaven("https://www.cursemaven.com", "CurseForge", "curse.maven")
     strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
+    maven("https://maven.terraformersmc.com/")
+    maven("https://maven.isxander.dev/releases")
     mavenCentral()
 }
 
 dependencies {
-
-    fun fapi(vararg modules: String) {
-        for (it in modules) modImplementation(fabricApi.module(it, sc.properties["deps.fabric_api"]))
-    }
-
     minecraft("com.mojang:minecraft:${sc.current.version}")
     loomx.applyMojangMappings()
 
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc:fabric-language-kotlin:1.13.12+kotlin.2.4.0")
-    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-registry-sync-v0")
+    modImplementation("com.terraformersmc:modmenu:${sc.properties["deps.modmenu"] as String}")
+    modImplementation("dev.isxander:yet-another-config-lib:${sc.properties["deps.yacl"] as String}")
+    listOf(
+        "fabric-lifecycle-events-v1",
+//        "fabric-resource-loader-v0",
+//        "fabric-content-registries-v0",
+//        "fabric-registry-sync-v0"
+    ).forEach { module ->
+        modImplementation(fabricApi.module(module, sc.properties["deps.fabric_api"]))
+    }
 }
 
 loom {
@@ -84,6 +90,8 @@ tasks {
             register("name", "mod.name")
             register("version", "mod.version")
             register("minecraft", "mod.mc_compat")
+//            register("modmenu", "deps.modmenu")
+//            register("yacl", "deps.yacl")
         }
 
         filesMatching("fabric.mod.json") { expand(props) }

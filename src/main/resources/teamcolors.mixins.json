@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "me.imtoggle.teamcolors.mixin",
+  "compatibilityLevel": "${java}",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "EntityHitboxDebugRendererMixin",
+    "EntityRendererMixin",
+    "NametagMixin"
+  ]
+}
