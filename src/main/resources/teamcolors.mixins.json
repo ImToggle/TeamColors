@@ -3,6 +3,7 @@
   "package": "me.imtoggle.teamcolors.mixin",
   "plugin": "me.imtoggle.teamcolors.TeamColorsMixinPlugin",
   "compatibilityLevel": "${java}",
+  "refmap": "teamcolors.refmap.json",
   "injectors": {
     "defaultRequire": 1
   },
@@ -10,7 +11,8 @@
     "EntityRendererMixin",
     "HixboxMixin",
     "NametagMixin",
-    "compat.NametagTweaksMixin",
-    "compat.HitboxPlusMixin"
+    "compat.CombatHitboxesMixin",
+    "compat.HitboxPlusMixin",
+    "compat.NametagTweaksMixin"
   ]
 }
