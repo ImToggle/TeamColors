@@ -1,4 +1,4 @@
-package me.imtoggle.teamcolors
+package me.imtoggle.teamcolors.util
 
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.FormattedText

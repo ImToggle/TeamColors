@@ -1,8 +1,9 @@
-package me.imtoggle.teamcolors
+package me.imtoggle.teamcolors.config
 
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler
 import dev.isxander.yacl3.config.v2.api.SerialEntry
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder
+import me.imtoggle.teamcolors.util.Config
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.resources.Identifier
 

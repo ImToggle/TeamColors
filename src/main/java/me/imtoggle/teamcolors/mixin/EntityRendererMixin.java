@@ -1,9 +1,9 @@
 package me.imtoggle.teamcolors.mixin;
 
+import me.imtoggle.teamcolors.util.Util;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 //? if >= 1.21.4 {
-import me.imtoggle.teamcolors.TagComponent;
-import me.imtoggle.teamcolors.Util;
+import me.imtoggle.teamcolors.util.TagComponent;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.injection.At;

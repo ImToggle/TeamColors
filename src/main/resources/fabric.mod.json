@@ -12,7 +12,7 @@
     "sources": ""
   },
   "license": "",
-  "icon": "assets/template/icon.png",
+  "icon": "assets/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
@@ -22,7 +22,7 @@
       }
     ],
     "modmenu": [
-      "me.imtoggle.teamcolors.ModMenuIntegration"
+      "me.imtoggle.teamcolors.config.ModMenuIntegration"
     ]
   },
   "mixins": [

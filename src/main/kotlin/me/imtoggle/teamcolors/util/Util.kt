@@ -1,6 +1,6 @@
 @file:JvmName("Util")
 
-package me.imtoggle.teamcolors
+package me.imtoggle.teamcolors.util
 
 import net.minecraft.world.entity.Entity
 import java.awt.Color

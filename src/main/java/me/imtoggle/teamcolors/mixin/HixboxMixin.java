@@ -1,6 +1,6 @@
 package me.imtoggle.teamcolors.mixin;
 
-import me.imtoggle.teamcolors.Util;
+import me.imtoggle.teamcolors.util.Util;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -22,7 +22,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 /^@Mixin(net.minecraft.client.renderer.entity.EntityRenderDispatcher.class)
 ^///? }
 *///? }
-public class EntityHitboxDebugRendererMixin {
+public class HixboxMixin {
 
     //? if >= 1.21.11 {
     @ModifyConstant(method = "showHitboxes", constant = @Constant(intValue = -1, ordinal = 0))

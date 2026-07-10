@@ -1,4 +1,4 @@
-package me.imtoggle.teamcolors
+package me.imtoggle.teamcolors.config
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory
 import com.terraformersmc.modmenu.api.ModMenuApi
@@ -8,6 +8,10 @@ import dev.isxander.yacl3.api.OptionGroup
 import dev.isxander.yacl3.api.YetAnotherConfigLib
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder
+import me.imtoggle.teamcolors.util.ConfigEntry
+import me.imtoggle.teamcolors.util.Entry
+import me.imtoggle.teamcolors.util.settings
+import me.imtoggle.teamcolors.util.updateColors
 import net.minecraft.network.chat.Component
 
 

@@ -1,11 +1,11 @@
 package me.imtoggle.teamcolors.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import me.imtoggle.teamcolors.Util;
+import me.imtoggle.teamcolors.util.Util;
 import org.spongepowered.asm.mixin.Mixin;
 
 //? if >= 1.21.4 {
-import me.imtoggle.teamcolors.TagComponent;
+import me.imtoggle.teamcolors.util.TagComponent;
 import net.minecraft.network.chat.Component;
 //? }
 

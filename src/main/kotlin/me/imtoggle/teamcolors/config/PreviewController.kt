@@ -1,4 +1,4 @@
-package me.imtoggle.teamcolors
+package me.imtoggle.teamcolors.config
 
 import dev.isxander.yacl3.api.Controller
 import dev.isxander.yacl3.api.Option
@@ -6,6 +6,9 @@ import dev.isxander.yacl3.api.utils.Dimension
 import dev.isxander.yacl3.gui.AbstractWidget
 import dev.isxander.yacl3.gui.YACLScreen
 import dev.isxander.yacl3.gui.controllers.ControllerWidget
+import me.imtoggle.teamcolors.util.getHitboxColor
+import me.imtoggle.teamcolors.util.getNametagColor
+import me.imtoggle.teamcolors.util.vanillaColors
 import net.minecraft.client.gui.GuiGraphicsExtractor
 
 class PreviewController(private val option: Option<Boolean>) : Controller<Boolean> {
