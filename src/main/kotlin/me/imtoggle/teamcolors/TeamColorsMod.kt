@@ -6,7 +6,7 @@ import me.imtoggle.teamcolors.util.updateColors
 import me.imtoggle.teamcolors.util.vanillaColors
 import net.fabricmc.api.ClientModInitializer
 
-class TemplateMod : ClientModInitializer {
+class TeamColorsMod : ClientModInitializer {
 
     override fun onInitializeClient() {
         vanillaColors

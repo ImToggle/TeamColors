@@ -18,7 +18,7 @@
     "client": [
       {
         "adapter": "kotlin",
-        "value": "me.imtoggle.teamcolors.TemplateMod"
+        "value": "me.imtoggle.teamcolors.TeamColorsMod"
       }
     ],
     "modmenu": [
