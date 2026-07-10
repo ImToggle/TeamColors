@@ -31,6 +31,7 @@ repositories {
     strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
     maven("https://maven.terraformersmc.com/")
     maven("https://maven.isxander.dev/releases")
+    maven("https://maven.bawnorton.com/releases")
     mavenCentral()
 }
 
@@ -50,6 +51,11 @@ dependencies {
     ).forEach { module ->
         modImplementation(fabricApi.module(module, sc.properties["deps.fabric_api"]))
     }
+
+    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7-beta.3")!!)!!)
+
+//    implementation(project.rootProject.files("libs/hitboxplus-1.0.0+26.1.jar"))
+//    implementation(project.rootProject.files("libs/nametagtweaks-1.3.9+1.21.6-fabric.jar"))
 }
 
 loom {

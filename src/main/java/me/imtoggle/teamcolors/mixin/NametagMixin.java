@@ -24,12 +24,13 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 ^///? }
 *///? }
 public class NametagMixin {
-
     //? if >= 26.2 {
     @ModifyConstant(method = "submitNameTag", constant = @Constant(intValue = -16777216, ordinal = 0))
     private int setColor(int value, @Local(ordinal = 0, argsOnly = true) final Component name) {
+        Util.hasTeam = false;
         if (name instanceof TagComponent tagComponent) {
-            return Util.getNametagColor(tagComponent.getTeamColor());
+            Util.hasTeam = true;
+            return Util.teamColor = Util.getNametagColor(tagComponent.getTeamColor());
         }
         return value;
     }
@@ -41,15 +42,18 @@ public class NametagMixin {
     ^///? }
     //? if >= 1.21.4 {
     private int setColor(int value, @Local(ordinal = 0, argsOnly = true) final Component name) {
+        Util.hasTeam = false;
         if (name instanceof TagComponent tagComponent) {
-            return (Util.getNametagColor(tagComponent.getTeamColor()) & 0x00FFFFFF) | value;
+            Util.hasTeam = true;
+            return Util.teamColor = (Util.getNametagColor(tagComponent.getTeamColor()) & 0x00FFFFFF) | value;
         }
         return value;
     }
     //? } else {
     /^private int setColor(int value, @Local(ordinal = 0, argsOnly = true) net.minecraft.world.entity.Entity entity) {
-        if (!Util.hasTeamColor(entity)) return value;
-        return (Util.getNametagColor(entity.getTeamColor()) & 0x00FFFFFF) | value;
+        Util.hasTeam = Util.hasTeamColor(entity);
+        if (!Util.hasTeam) return value;
+        return Util.teamColor = (Util.getNametagColor(entity.getTeamColor()) & 0x00FFFFFF) | value;
     }
     ^///? }
     *///? }

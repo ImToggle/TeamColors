@@ -6,8 +6,12 @@
     "defaultRequire": 1
   },
   "client": [
-    "HixboxMixin",
     "EntityRendererMixin",
-    "NametagMixin"
+    "HixboxMixin",
+    "NametagMixin",
+    "compat.NametagTweaksMixin"
+  ],
+  "mixins": [
+    "compat.RuntimeHitboxLookupMixin"
   ]
 }

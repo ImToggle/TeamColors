@@ -5,6 +5,12 @@ package me.imtoggle.teamcolors.util
 import net.minecraft.world.entity.Entity
 import java.awt.Color
 
+@JvmField
+var hasTeam = false
+
+@JvmField
+var teamColor = -1
+
 val vanillaColors = getColors()
 
 private val hitboxMap = HashMap<Int, Int>()
