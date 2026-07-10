@@ -1,6 +1,7 @@
 {
   "required": true,
   "package": "me.imtoggle.teamcolors.mixin",
+  "plugin": "me.imtoggle.teamcolors.TeamColorsMixinPlugin",
   "compatibilityLevel": "${java}",
   "injectors": {
     "defaultRequire": 1
@@ -9,9 +10,7 @@
     "EntityRendererMixin",
     "HixboxMixin",
     "NametagMixin",
-    "compat.NametagTweaksMixin"
-  ],
-  "mixins": [
-    "compat.RuntimeHitboxLookupMixin"
+    "compat.NametagTweaksMixin",
+    "compat.HitboxPlusMixin"
   ]
 }

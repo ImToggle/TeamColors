@@ -8,12 +8,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(targets = { "io.github.pingisfun.hitboxplus.runtime.RuntimeHitboxLookup" })
-public class RuntimeHitboxLookupMixin {
+public class HitboxPlusMixin {
 
     @Dynamic("HitBoxPlus")
     @Inject(method = "teamColor", at = @At("RETURN"), cancellable = true)
     private static void modifySB(CallbackInfoReturnable<Integer> cir) {
-        if (cir.getReturnValue() == null) return;
+        if (!Util.isHitboxEnabled() || cir.getReturnValue() == null) return;
         cir.setReturnValue(Util.getHitboxColor(cir.getReturnValue()));
     }
 

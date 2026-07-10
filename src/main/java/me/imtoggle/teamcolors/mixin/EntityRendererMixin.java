@@ -23,7 +23,7 @@ public class EntityRendererMixin {
     /*@Inject(method = "extractRenderState", at = @At("TAIL"))
     private void addTag(Entity entity, EntityRenderState state, float partialTicks, CallbackInfo ci) {
     *///? }
-        if (!Util.hasTeamColor(entity)) return;
+        if (!Util.isNametagEnabled() || !Util.hasTeamColor(entity)) return;
         int teamColor = entity.getTeamColor();
         //? if >= 26.1 {
         if (state.scoreText != null) {

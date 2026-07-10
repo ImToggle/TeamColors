@@ -14,7 +14,6 @@ import me.imtoggle.teamcolors.util.settings
 import me.imtoggle.teamcolors.util.updateColors
 import net.minecraft.network.chat.Component
 
-
 class ModMenuIntegration : ModMenuApi {
 
     fun ConfigCategory.Builder.buildGroup(name: String, entries: List<Entry>): ConfigCategory.Builder {
@@ -55,6 +54,15 @@ class ModMenuIntegration : ModMenuApi {
         val isHitbox = category == "Hitbox"
         return this.category(ConfigCategory.createBuilder()
             .name(Component.literal(category))
+            .option(Option.createBuilder<Boolean>()
+                .name(Component.literal("Enabled"))
+                .binding(entries[1].enabled, { entries[2].enabled }, { entries[2].enabled = it })
+                .controller { option -> BooleanControllerBuilder.create(option) }
+                .addListener { option, _ ->
+                    entries[0].enabled = option.pendingValue()
+                }
+                .build()
+            )
             .option(Option.createBuilder<Boolean>()
                 .name(Component.literal("Color Preview"))
                 .customController { option -> PreviewController(option) }

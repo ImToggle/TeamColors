@@ -51,7 +51,7 @@ public class NametagMixin {
     }
     //? } else {
     /^private int setColor(int value, @Local(ordinal = 0, argsOnly = true) net.minecraft.world.entity.Entity entity) {
-        Util.hasTeam = Util.hasTeamColor(entity);
+        Util.hasTeam = Util.isNametagEnabled() && Util.hasTeamColor(entity);
         if (!Util.hasTeam) return value;
         return Util.teamColor = (Util.getNametagColor(entity.getTeamColor()) & 0x00FFFFFF) | value;
     }

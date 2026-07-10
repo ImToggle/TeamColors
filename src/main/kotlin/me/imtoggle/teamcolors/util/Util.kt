@@ -18,6 +18,12 @@ private val nametagMap = HashMap<Int, Int>()
 
 var settings = Config()
 
+val isHitboxEnabled
+    get() = settings.hitbox.enabled
+
+val isNametagEnabled
+    get() = settings.nametag.enabled
+
 fun getColors(): List<Int> {
     //? if >=26.2 {
     return net.minecraft.world.scores.TeamColor.entries.map { it.rgb() }
@@ -80,8 +86,8 @@ data class Entry(var mode: Boolean = false, var value: Int = 100) : Cloneable {
     public override fun clone() = Entry(this.mode, this.value)
 }
 
-data class ConfigEntry(var saturation: Entry = Entry(), var brightness: Entry = Entry()) : Cloneable {
-    public override fun clone() = ConfigEntry(saturation.copy(), brightness.copy())
+data class ConfigEntry(var enabled: Boolean = true, var saturation: Entry = Entry(), var brightness: Entry = Entry()) : Cloneable {
+    public override fun clone() = ConfigEntry(this.enabled, saturation.copy(), brightness.copy())
 }
 
 data class Config(var hitbox: ConfigEntry = ConfigEntry(), var nametag: ConfigEntry = ConfigEntry()) : Cloneable {

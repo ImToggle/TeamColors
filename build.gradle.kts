@@ -53,9 +53,6 @@ dependencies {
     }
 
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7-beta.3")!!)!!)
-
-//    implementation(project.rootProject.files("libs/hitboxplus-1.0.0+26.1.jar"))
-//    implementation(project.rootProject.files("libs/nametagtweaks-1.3.9+1.21.6-fabric.jar"))
 }
 
 loom {
