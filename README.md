@@ -18,6 +18,8 @@ Compatible Mods
 - [Hitbox+ by PingIsFun](https://modrinth.com/mod/hitboxplus)
 - [Nametag Tweaks by Microcontrollers](https://modrinth.com/mod/nametagtweaks)
 
+[**Create issues for more supported mods**](https://github.com/ImToggle/TeamColors/issues)
+
 ## Screenshots
 
 Colored Hitbox & Nametag
