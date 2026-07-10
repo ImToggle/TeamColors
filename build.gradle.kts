@@ -120,6 +120,7 @@ tasks {
         modrinth {
             projectId = property("publish.modrinth").toString()
             accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+            environment = CLIENT_ONLY
             minecraftVersions.addAll(compatibleVersions)
             requires("fabric-language-kotlin")
             requires("modmenu")
