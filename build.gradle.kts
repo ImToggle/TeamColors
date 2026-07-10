@@ -1,5 +1,6 @@
 plugins {
     id("dev.kikugie.loom-back-compat")
+    id("me.modmuss50.mod-publish-plugin") version "2.1.1"
     kotlin("jvm")
 }
 
@@ -90,8 +91,6 @@ tasks {
             register("name", "mod.name")
             register("version", "mod.version")
             register("minecraft", "mod.mc_compat")
-//            register("modmenu", "deps.modmenu")
-//            register("yacl", "deps.yacl")
         }
 
         filesMatching("fabric.mod.json") { expand(props) }
@@ -107,5 +106,21 @@ tasks {
         inputs.property("version", project.property("mod.version"))
         from(loomx.modJar.flatMap { it.archiveFile }, loomx.modSourcesJar.flatMap { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
+    }
+
+    publishMods {
+        file = loomx.modJar.get().archiveFile
+        changelog = project.rootProject.file("CHANGELOG.md").takeIf { it.exists() }?.readText() ?: "No changelog provided."
+        type = STABLE
+        modLoaders.add("fabric")
+
+        modrinth {
+            projectId = property("publish.modrinth").toString()
+            accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+            minecraftVersions.addAll(compatibleVersions)
+            requires("fabric-language-kotlin")
+            requires("modmenu")
+            requires("yacl")
+        }
     }
 }
