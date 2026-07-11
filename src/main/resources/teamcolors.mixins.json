@@ -11,6 +11,7 @@
     "EntityRendererMixin",
     "HixboxMixin",
     "NametagMixin",
+    "PlayerRendererMixin",
     "compat.CombatHitboxesMixin",
     "compat.EntityCullingMixin",
     "compat.HitboxPlusMixin",
