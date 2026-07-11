@@ -4,7 +4,7 @@ This client-side mod changes hitbox and nametag background color based on entity
 
 ## Features
 
-- Customizable Saturation & Brightness
+- Customizable color saturation & brightness
 
 ## Compatibility
 
@@ -15,10 +15,13 @@ Supported Versions
 Compatible Mods
 
 - [Combat Hitboxes by sootysplash](https://modrinth.com/mod/combat-hitboxes)
+- [Entity Culling by tr7zw](https://modrinth.com/mod/entityculling)
 - [Hitbox+ by PingIsFun](https://modrinth.com/mod/hitboxplus)
 - [Nametag Tweaks by Microcontrollers](https://modrinth.com/mod/nametagtweaks)
+- [PolyHitbox by the Polyfrost Team](https://modrinth.com/mod/hitbox)
+- [PolyNametag by the Polyfrost Team](https://modrinth.com/mod/polynametag)
 
-[**Create issues for more supported mods**](https://github.com/ImToggle/TeamColors/issues)
+[**Create issues here for more version/mod support!**](https://github.com/ImToggle/TeamColors/issues)
 
 ## Screenshots
 
@@ -29,3 +32,7 @@ Colored Hitbox & Nametag
 Config Menu
 
 ![Config Menu](https://github.com/ImToggle/TeamColors/blob/main/gallery/ConfigMenu.png?raw=true)
+
+With PolyHitbox & PolyNametag
+
+![With PolyHitbox & PolyNametag](https://github.com/ImToggle/TeamColors/blob/main/gallery/polymods.png?raw=true)
