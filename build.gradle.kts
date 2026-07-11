@@ -35,6 +35,15 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    val dummy = create("dummy")
+    main {
+        dummy.compileClasspath += compileClasspath
+        compileClasspath += dummy.output
+        output.setResourcesDir(java.classesDirectory)
+    }
+}
+
 dependencies {
     minecraft("com.mojang:minecraft:${sc.current.version}")
     loomx.applyMojangMappings()
@@ -68,6 +77,8 @@ loom {
         runDirectory = rootProject.file("run")
         jvmArguments.add("-Dmixin.debug.export=true")
     }
+
+    runConfigs.remove(runConfigs["server"])
 }
 
 java {

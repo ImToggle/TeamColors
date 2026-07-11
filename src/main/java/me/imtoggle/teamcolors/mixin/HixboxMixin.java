@@ -28,13 +28,13 @@ public class HixboxMixin {
     @ModifyConstant(method = "showHitboxes", constant = @Constant(intValue = -1, ordinal = 0))
     private int setColor(int value, @Local(ordinal = 0, argsOnly = true) Entity entity) {
         if (!Util.isHitboxEnabled() || !Util.hasTeamColor(entity)) return value;
-        return Util.getHitboxColor(entity.getTeamColor());
+        return Util.getHitboxColor(entity);
     }
     //? } elif >= 1.21.8 {
     /*@WrapOperation(method = "extractHitboxes(Lnet/minecraft/world/entity/Entity;FZ)Lnet/minecraft/client/renderer/entity/state/HitboxesRenderState;", at = @At(value = "NEW", target = "(DDDDDDFFF)Lnet/minecraft/client/renderer/entity/state/HitboxRenderState;", ordinal = 1))
     private net.minecraft.client.renderer.entity.state.HitboxRenderState setColor(double d, double e, double f, double g, double h, double i, float j, float k, float l, Operation<net.minecraft.client.renderer.entity.state.HitboxRenderState> original, @Local(ordinal = 0) Entity entity) {
         if (!Util.isHitboxEnabled() || !Util.hasTeamColor(entity)) return original.call(d, e, f, g, h, i, j, k, l);
-        int color = Util.getHitboxColor(entity.getTeamColor());
+        int color = Util.getHitboxColor(entity);
         return original.call(d, e, f, g, h, i, Util.getRed(color) / 255f, Util.getGreen(color) / 255f, Util.getBlue(color) / 255f);
     }
     *///? } else {
@@ -48,7 +48,7 @@ public class HixboxMixin {
             original.call(poseStack, vertexConsumer, entity, f, g, h, i);
             return;
         }
-        int color = Util.getHitboxColor(entity.getTeamColor());
+        int color = Util.getHitboxColor(entity);
         original.call(poseStack, vertexConsumer, entity, f, Util.getRed(color) / 255f, Util.getGreen(color) / 255f, Util.getBlue(color) / 255f);
     }
     *///? }

@@ -54,7 +54,7 @@ public class NametagMixin {
         Util.hasTeam = Util.isNametagEnabled() && Util.hasTeamColor(entity);
         if (!Util.hasTeam) return value;
         Util.hasTeam = false;
-        return Util.teamColor = (Util.getNametagColor(entity.getTeamColor()) & 0x00FFFFFF) | value;
+        return Util.teamColor = (Util.getNametagColor(entity) & 0x00FFFFFF) | value;
     }
     ^///? }
     *///? }

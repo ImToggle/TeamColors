@@ -50,6 +50,14 @@ fun Entity.hasTeamColor(): Boolean {
     *///? }
 }
 
+fun getTeamColor(entity: Entity): Int {
+    //? if >= 26.2 {
+    return entity.team!!.color.get().rgb()
+    //? } else {
+    /*return entity.team!!.color.color ?: -1
+    *///? }
+}
+
 fun getRed(color: Int): Int {
     return color and 0x00FF0000 shr 16
 }
@@ -74,8 +82,16 @@ fun calculateColor(color: Int, cfgEntry: ConfigEntry): Int {
     return Color.HSBtoRGB(hsb[0], hsb[1], hsb[2])
 }
 
+fun getHitboxColor(entity: Entity): Int {
+    return hitboxMap[getTeamColor(entity)] ?: -1
+}
+
 fun getHitboxColor(rgb: Int): Int {
     return hitboxMap[rgb] ?: rgb
+}
+
+fun getNametagColor(entity: Entity): Int {
+    return nametagMap[getTeamColor(entity)] ?: -1
 }
 
 fun getNametagColor(rgb: Int): Int {

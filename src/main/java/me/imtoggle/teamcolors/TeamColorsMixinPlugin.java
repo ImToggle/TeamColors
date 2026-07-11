@@ -13,11 +13,18 @@ import java.util.function.Supplier;
 
 public class TeamColorsMixinPlugin implements IMixinConfigPlugin {
 
-    private static final Map<String, Supplier<Boolean>> CONDITIONS = ImmutableMap.of(
-        "me.imtoggle.teamcolors.mixin.compat.CombatHitboxesMixin", () -> FabricLoader.getInstance().isModLoaded("combat-hitboxes"),
-        "me.imtoggle.teamcolors.mixin.compat.HitboxPlusMixin", () -> FabricLoader.getInstance().isModLoaded("hitboxplus"),
-        "me.imtoggle.teamcolors.mixin.compat.NametagTweaksMixin", () -> FabricLoader.getInstance().isModLoaded("nametagtweaks")
+    private static final Map<String, String> mixinMap = ImmutableMap.of(
+            "CombatHitboxesMixin", "combat-hitboxes",
+            "HitboxPlusMixin", "hitboxplus",
+            "NametagTweaksMixin", "nametagtweaks",
+            "PolyHitboxMixin", "polyhitbox"
     );
+
+    private static final Map<String, Supplier<Boolean>> CONDITIONS = mixinMap.entrySet().stream()
+            .collect(ImmutableMap.toImmutableMap(
+                    entry -> "me.imtoggle.teamcolors.mixin.compat." + entry.getKey(),
+                    entry -> () -> FabricLoader.getInstance().isModLoaded(entry.getValue())
+            ));
 
     @Override
     public void onLoad(String mixinPackage) {
