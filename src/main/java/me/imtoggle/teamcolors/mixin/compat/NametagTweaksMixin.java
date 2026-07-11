@@ -27,6 +27,6 @@ public class NametagTweaksMixin {
     @ModifyReturnValue(method = "@MixinSquared:Handler", at = @At("RETURN"))
     private int nametagtweaks(int value) {
         if (!Util.hasTeam) return value;
-        return (Util.teamColor & 0x00FFFFFF) | (value & 0xFF000000);
+        return Util.tagColor | (value & 0xFF000000);
     }
 }

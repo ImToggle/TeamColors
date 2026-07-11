@@ -35,7 +35,7 @@ public class HixboxMixin {
     private net.minecraft.client.renderer.entity.state.HitboxRenderState setColor(double d, double e, double f, double g, double h, double i, float j, float k, float l, Operation<net.minecraft.client.renderer.entity.state.HitboxRenderState> original, @Local(ordinal = 0) Entity entity) {
         if (!Util.isHitboxEnabled() || !Util.hasTeamColor(entity)) return original.call(d, e, f, g, h, i, j, k, l);
         int color = Util.getHitboxColor(entity);
-        return original.call(d, e, f, g, h, i, Util.getRed(color) / 255f, Util.getGreen(color) / 255f, Util.getBlue(color) / 255f);
+        return original.call(d, e, f, g, h, i, Util.red(color) / 255f, Util.green(color) / 255f, Util.blue(color) / 255f);
     }
     *///? } else {
     /*//? if >= 1.21.4 {
@@ -49,7 +49,7 @@ public class HixboxMixin {
             return;
         }
         int color = Util.getHitboxColor(entity);
-        original.call(poseStack, vertexConsumer, entity, f, Util.getRed(color) / 255f, Util.getGreen(color) / 255f, Util.getBlue(color) / 255f);
+        original.call(poseStack, vertexConsumer, entity, f, Util.red(color) / 255f, Util.green(color) / 255f, Util.blue(color) / 255f);
     }
     *///? }
 }

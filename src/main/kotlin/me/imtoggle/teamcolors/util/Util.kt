@@ -9,7 +9,7 @@ import java.awt.Color
 var hasTeam = false
 
 @JvmField
-var teamColor = -1
+var tagColor = -1
 
 val vanillaColors = getColors()
 
@@ -24,7 +24,7 @@ val isHitboxEnabled
 val isNametagEnabled
     get() = settings.nametag.enabled
 
-fun getColors(): List<Int> {
+private fun getColors(): List<Int> {
     //? if >=26.2 {
     return net.minecraft.world.scores.TeamColor.entries.map { it.rgb() }
     //? } else {
@@ -58,21 +58,15 @@ fun getTeamColor(entity: Entity): Int {
     *///? }
 }
 
-fun getRed(color: Int): Int {
-    return color and 0x00FF0000 shr 16
-}
+fun Int.red() = this and 0x00FF0000 shr 16
 
-fun getGreen(color: Int): Int {
-    return color and 0x0000FF00 shr 8
-}
+fun Int.green() = this and 0x0000FF00 shr 8
 
-fun getBlue(color: Int): Int {
-    return color and 0x000000FF
-}
+fun Int.blue() = this and 0x000000FF
 
-fun calculateColor(color: Int, cfgEntry: ConfigEntry): Int {
+private fun calculateColor(color: Int, cfgEntry: ConfigEntry): Int {
     val hsb = FloatArray(3)
-    Color.RGBtoHSB(getRed(color), getGreen(color), getBlue(color), hsb)
+    Color.RGBtoHSB(color.red(), color.green(), color.blue(), hsb)
     fun modify(i: Int, entry: Entry) {
         val value = entry.value / 100f
         hsb[i] = if (entry.mode) value else hsb[i] * value
