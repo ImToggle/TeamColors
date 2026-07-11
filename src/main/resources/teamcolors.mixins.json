@@ -14,6 +14,7 @@
     "compat.CombatHitboxesMixin",
     "compat.HitboxPlusMixin",
     "compat.NametagTweaksMixin",
-    "compat.PolyHitboxMixin"
+    "compat.PolyHitboxMixin",
+    "compat.PolyNametagMixin"
   ]
 }
