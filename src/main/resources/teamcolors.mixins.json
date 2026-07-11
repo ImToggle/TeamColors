@@ -12,6 +12,7 @@
     "HixboxMixin",
     "NametagMixin",
     "compat.CombatHitboxesMixin",
+    "compat.EntityCullingMixin",
     "compat.HitboxPlusMixin",
     "compat.NametagTweaksMixin",
     "compat.PolyHitboxMixin",

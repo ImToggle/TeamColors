@@ -63,11 +63,6 @@ dependencies {
 
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7-beta.3")!!)!!)
 
-    val POLYHITBOX = "1.0.3+" + "1.21.11"
-
-    modImplementation(rootProject.files("/libs/polynametag-1.1.0-alpha.1+26.1.jar"))
-
-//    modImplementation(rootProject.files("/libs/polyhitbox/${POLYHITBOX}.jar"))
 }
 
 loom {

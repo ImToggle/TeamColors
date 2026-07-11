@@ -58,6 +58,21 @@ fun getTeamColor(entity: Entity): Int {
     *///? }
 }
 
+//? if >= 1.21.4 {
+fun handleState(entity: Entity, state: net.minecraft.client.renderer.entity.state.EntityRenderState) {
+    if (!isNametagEnabled || !entity.hasTeamColor()) return
+    val teamColor = getTeamColor(entity)
+    //? if >= 26.1 {
+    if (state.scoreText != null) {
+        state.scoreText = TagComponent(state.scoreText!!, teamColor)
+    }
+    //? }
+    if (state.nameTag != null) {
+        state.nameTag = TagComponent(state.nameTag!!, teamColor)
+    }
+}
+//? }
+
 fun Int.red() = this and 0x00FF0000 shr 16
 
 fun Int.green() = this and 0x0000FF00 shr 8

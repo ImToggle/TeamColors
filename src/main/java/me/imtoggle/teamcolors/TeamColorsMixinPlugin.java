@@ -19,7 +19,8 @@ public class TeamColorsMixinPlugin implements IMixinConfigPlugin {
             "NametagTweaksMixin", "nametagtweaks",
             "PolyHitboxMixin", "polyhitbox",
             "PolyNametagMixin", "polynametag",
-            "PolyNametagRendererMixin", "polynametag"
+            "PolyNametagRendererMixin", "polynametag",
+            "EntityCullingMixin", "entityculling"
     );
 
     private static final Map<String, Supplier<Boolean>> CONDITIONS = mixinMap.entrySet().stream()

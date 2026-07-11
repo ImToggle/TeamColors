@@ -1,6 +1,5 @@
 package me.imtoggle.teamcolors.mixin;
 
-import me.imtoggle.teamcolors.util.TagComponent;
 import me.imtoggle.teamcolors.util.Util;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.world.entity.Entity;
@@ -14,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //? } else {
 /*import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import me.imtoggle.teamcolors.util.TagComponent;
 import net.minecraft.network.chat.Component;
 *///? }
 
@@ -27,16 +27,7 @@ public class EntityRendererMixin {
     /*@Inject(method = "extractRenderState", at = @At("TAIL"))
     *///? }
     private void addTag(CallbackInfo ci, @Local(argsOnly = true) Entity entity, @Local(argsOnly = true) EntityRenderState state) {
-        if (!Util.isNametagEnabled() || !Util.hasTeamColor(entity)) return;
-        int teamColor = Util.getTeamColor(entity);
-        //? if >= 26.1 {
-        if (state.scoreText != null) {
-            state.scoreText = new TagComponent(state.scoreText, teamColor);
-        }
-        //? }
-        if (state.nameTag != null) {
-            state.nameTag = new TagComponent(state.nameTag, teamColor);
-        }
+        Util.handleState(entity, state);
     }
     //? } else {
     /*@WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;getDisplayName()Lnet/minecraft/network/chat/Component;"))
