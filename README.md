@@ -15,7 +15,6 @@ Supported Versions
 Compatible Mods
 
 - [Combat Hitboxes by sootysplash](https://modrinth.com/mod/combat-hitboxes)
-- [Entity Culling by tr7zw](https://modrinth.com/mod/entityculling)
 - [Hitbox+ by PingIsFun](https://modrinth.com/mod/hitboxplus)
 - [Nametag Tweaks by Microcontrollers](https://modrinth.com/mod/nametagtweaks)
 - [PolyHitbox by the Polyfrost Team](https://modrinth.com/mod/hitbox)
