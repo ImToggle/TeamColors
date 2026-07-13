@@ -2,6 +2,8 @@
 
 package me.imtoggle.teamcolors.util
 
+import dev.isxander.yacl3.api.YetAnotherConfigLib
+import me.imtoggle.teamcolors.config.ModConfig
 import net.minecraft.world.entity.Entity
 import java.awt.Color
 
@@ -11,12 +13,15 @@ var hasTeam = false
 @JvmField
 var tagColor = -1
 
+var currentInstance: YetAnotherConfigLib? = null
+
 val vanillaColors = getColors()
 
-private val hitboxMap = HashMap<Int, Int>()
-private val nametagMap = HashMap<Int, Int>()
+var hitboxMap = mutableMapOf<Int, Int>()
+var nametagMap = mutableMapOf<Int, Int>()
 
-var settings = Config()
+val settings
+    get() = ModConfig.CONFIG.instance().config
 
 val isHitboxEnabled
     get() = settings.hitbox.enabled
@@ -117,5 +122,4 @@ data class ConfigEntry(var enabled: Boolean = true, var saturation: Entry = Entr
 
 data class Config(var hitbox: ConfigEntry = ConfigEntry(), var nametag: ConfigEntry = ConfigEntry()) : Cloneable {
     public override fun clone() = Config(hitbox.clone(), nametag.clone())
-
 }

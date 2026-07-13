@@ -5,7 +5,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,12 +14,13 @@ public class TeamColorsMixinPlugin implements IMixinConfigPlugin {
 
     private static final Map<String, String> mixinMap = ImmutableMap.of(
             "CombatHitboxesMixin", "combat-hitboxes",
+            "EntityCullingMixin", "entityculling",
             "HitboxPlusMixin", "hitboxplus",
             "NametagTweaksMixin", "nametagtweaks",
+            "OneConfigMixin", "oneconfig",
             "PolyHitboxMixin", "polyhitbox",
             "PolyNametagMixin", "polynametag",
-            "PolyNametagRendererMixin", "polynametag",
-            "EntityCullingMixin", "entityculling"
+            "PolyNametagRendererMixin", "polynametag"
     );
 
     private static final Map<String, Supplier<Boolean>> CONDITIONS = mixinMap.entrySet().stream()

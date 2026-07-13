@@ -16,6 +16,7 @@
     "compat.EntityCullingMixin",
     "compat.HitboxPlusMixin",
     "compat.NametagTweaksMixin",
+    "compat.OneConfigMixin",
     "compat.PolyHitboxMixin",
     "compat.PolyNametagMixin",
     "compat.PolyNametagRendererMixin"

@@ -5,85 +5,88 @@ import com.terraformersmc.modmenu.api.ModMenuApi
 import dev.isxander.yacl3.api.ConfigCategory
 import dev.isxander.yacl3.api.Option
 import dev.isxander.yacl3.api.OptionGroup
+import dev.isxander.yacl3.api.StateManager
 import dev.isxander.yacl3.api.YetAnotherConfigLib
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder
 import me.imtoggle.teamcolors.util.ConfigEntry
 import me.imtoggle.teamcolors.util.Entry
-import me.imtoggle.teamcolors.util.settings
+import me.imtoggle.teamcolors.util.currentInstance
 import me.imtoggle.teamcolors.util.updateColors
 import net.minecraft.network.chat.Component
 
 class ModMenuIntegration : ModMenuApi {
 
-    fun ConfigCategory.Builder.buildGroup(name: String, entries: List<Entry>): ConfigCategory.Builder {
-        val (settings, default, current) = entries
+    fun ConfigCategory.Builder.buildGroup(name: String, default: Entry, current: Entry): ConfigCategory.Builder {
         return this.group(OptionGroup.createBuilder()
             .name(Component.literal(name))
             .option(Option.createBuilder<Boolean>()
                 .name(Component.literal("Mode"))
-                .binding(settings.mode, { current.mode }, { value -> current.mode = value })
+                .stateManager(StateManager.createInstant(
+                    default.mode,
+                    { current.mode },
+                    { value -> current.mode = value }
+                ))
                 .controller { option -> BooleanControllerBuilder.create(option)
                     .formatValue { value -> Component.literal(if (value) "Absolute" else "Multiplier") }
                 }
-                .addListener { option, _ ->
-                    settings.mode = option.pendingValue()
-                    updateColors()
-                }
+                .addListener { _, _ -> updateColors() }
                 .build()
             )
             .option(Option.createBuilder<Int>()
                 .name(Component.literal("Value"))
-                .binding(default.value,{ current.value }, { value -> current.value = value })
+                .stateManager(StateManager.createInstant(
+                    default.value,
+                    { current.value },
+                    { value -> current.value = value }
+                ))
                 .controller { option -> IntegerSliderControllerBuilder.create(option)
                     .range(0, 100)
                     .step(1)
                     .formatValue { value -> Component.literal("%d%%".format(value)) }
                 }
-                .addListener { option, _ ->
-                    settings.value = option.pendingValue()
-                    updateColors()
-                }
+                .addListener { _, _ -> updateColors() }
                 .build()
             )
             .build()
         )
     }
 
-    fun YetAnotherConfigLib.Builder.buildCategory(category: String, entries: List<ConfigEntry>): YetAnotherConfigLib.Builder {
+    fun YetAnotherConfigLib.Builder.buildCategory(category: String, default: ConfigEntry, current: ConfigEntry): YetAnotherConfigLib.Builder {
         val isHitbox = category == "Hitbox"
         return this.category(ConfigCategory.createBuilder()
             .name(Component.literal(category))
             .option(Option.createBuilder<Boolean>()
                 .name(Component.literal("Enabled"))
-                .binding(entries[1].enabled, { entries[2].enabled }, { entries[2].enabled = it })
+                .stateManager(StateManager.createInstant(
+                    default.enabled,
+                    { current.enabled },
+                    { value -> current.enabled = value }
+                ))
                 .controller { option -> BooleanControllerBuilder.create(option) }
-                .addListener { option, _ ->
-                    entries[0].enabled = option.pendingValue()
-                }
                 .build()
             )
             .option(Option.createBuilder<Boolean>()
                 .name(Component.literal("Color Preview"))
                 .customController { option -> PreviewController(option) }
-                .binding(isHitbox, { isHitbox }, {})
+                .stateManager(StateManager.createInstant(isHitbox, { isHitbox }, {}))
                 .build()
             )
-            .buildGroup("Saturation", entries.map { it.saturation })
-            .buildGroup("Brightness", entries.map { it.brightness })
+            .buildGroup("Saturation", default.saturation, current.saturation)
+            .buildGroup("Brightness", default.brightness, current.brightness)
             .build()
         )
     }
 
     override fun getModConfigScreenFactory(): ConfigScreenFactory<*> {
         return ConfigScreenFactory { parentScreen ->
-            YetAnotherConfigLib.create(ModConfig.CONFIG) { default, current, builder ->
-                val entries = arrayOf(settings, default.config, current.config)
-                builder
+            val yacl = YetAnotherConfigLib.create(ModConfig.CONFIG) { default, current, builder -> builder
                 .title(Component.literal("TeamColors"))
-                .buildCategory("Hitbox", entries.map { it.hitbox })
-                .buildCategory("Nametag", entries.map { it.nametag })
-            }.generateScreen(parentScreen)
+                .buildCategory("Hitbox", default.config.hitbox, current.config.hitbox)
+                .buildCategory("Nametag", default.config.nametag, current.config.nametag)
+            }
+            currentInstance = yacl
+            return@ConfigScreenFactory yacl.generateScreen(parentScreen)
         }
     }
 }

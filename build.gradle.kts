@@ -1,6 +1,7 @@
 plugins {
     id("dev.kikugie.loom-back-compat")
     id("me.modmuss50.mod-publish-plugin") version "2.1.1"
+    id("org.jetbrains.kotlin.plugin.compose") version "2.4.0"
     kotlin("jvm")
 }
 
@@ -32,6 +33,10 @@ repositories {
     maven("https://maven.terraformersmc.com/")
     maven("https://maven.isxander.dev/releases")
     maven("https://maven.bawnorton.com/releases")
+    maven("https://repo.polyfrost.org/releases")
+    maven("https://repo.polyfrost.org/snapshots")
+    maven("https://redirector.kotlinlang.org/maven/compose-dev")
+    google()
     mavenCentral()
 }
 
@@ -62,6 +67,14 @@ dependencies {
     }
 
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7-beta.3")!!)!!)
+
+    val oneconfigversion = "1.0.0-beta.7"
+
+    listOf(
+        "internal", "config"
+    ).forEach { module ->
+        modImplementation("org.polyfrost.oneconfig:${module}:$oneconfigversion")
+    }
 
 }
 
