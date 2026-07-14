@@ -27,6 +27,6 @@ public class PolyHitboxMixin {
     private PolyColor modifyColor(@Coerce Object instance, Operation<PolyColor> original, @Local Entity entity) {
         PolyColor color = original.call(instance);
         if (!Util.isHitboxEnabled() || !Util.hasTeamColor(entity)) return color;
-        return new PolyColor((Util.getHitboxColor(entity) & 0x00FFFFFF) | (color.getRawArgb() & 0xFF000000));
+        return new PolyColor(Util.getHitboxColor(entity) | (color.getRawArgb() & 0xFF000000));
     }
 }

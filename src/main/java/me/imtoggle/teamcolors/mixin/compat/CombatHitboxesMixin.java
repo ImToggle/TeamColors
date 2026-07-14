@@ -31,14 +31,14 @@ public class CombatHitboxesMixin {
     private int applyColor(@Coerce Object instance, Operation<Integer> original, @Local(ordinal = 0, argsOnly = true) Entity entity) {
         int color = original.call(instance);
         if (!Util.isHitboxEnabled() || !Util.hasTeamColor(entity)) return color;
-        return (Util.getHitboxColor(entity) & 0x00FFFFFF) | (color & 0xFF000000);
+        return Util.getHitboxColor(entity) | (color & 0xFF000000);
     }
     //? } else {
     /*@TargetHandler(mixin = "me.sootysplash.box.mixin.HitBoxRenderMixin", name = "renderBox")
     @org.spongepowered.asm.mixin.injection.ModifyVariable(method = "@MixinSquared:Handler", at = @At(value = "HEAD"), ordinal = 2, argsOnly = true)
     private static Color apply(Color color, @Local Entity entity) {
         if (!Util.isHitboxEnabled() || !Util.hasTeamColor(entity)) return color;
-        return new Color((Util.getHitboxColor(entity) & 0x00FFFFFF) | (color.getRGB() & 0xFF000000));
+        return new Color(Util.getHitboxColor(entity) | (color.getRGB() & 0xFF000000));
     }
     *///? }
 }

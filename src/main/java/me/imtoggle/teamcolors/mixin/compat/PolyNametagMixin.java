@@ -22,7 +22,7 @@ public class PolyNametagMixin {
     private int applyColor(Operation<Integer> original, @Local(argsOnly = true) Component text) {
         int color = original.call();
         if (text instanceof TagComponent tagComponent) {
-            color = (Util.getNametagColor(tagComponent.getTeamColor()) & 0x00FFFFFF) | (color & 0xFF000000);
+            color = Util.getNametagColor(tagComponent.getTeamColor()) | (color & 0xFF000000);
         }
         return color;
     }

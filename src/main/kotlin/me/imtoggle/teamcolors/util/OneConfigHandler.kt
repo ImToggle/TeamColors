@@ -58,20 +58,8 @@ fun handleTree(tree: Tree): Tree {
             group.onAll { _, node ->
                 var property = node as Property<*>
                 when (property.title) {
-                    "Mode" -> {
-                        val newProperty = Properties.functional(
-                            { if (option?.pendingValue() ?: false) 1 else 0 },
-                            { option?.requestSet(it == 1) },
-                            property.id,
-                            property.title,
-                            type = Int::class.java
-                        )
-                        newProperty.category = property.category
-                        newProperty.subcategory = property.subcategory
-                        newProperty.addMetadata("default", property.getMetadata("default"))
-                        newProperty.addMetadata("options", arrayOf("Multiplier", "Absolute"))
-                        newProperty.addMetadata("visualizer", Visualizer.RadioVisualizer::class.java)
-                        property = newProperty
+                    "Mode" -> option?.let {
+                        property = property.toRadioButton(it, arrayOf("Multiplier", "Absolute"))
                     }
                 }
                 @Suppress("UNCHECKED_CAST")
@@ -87,6 +75,22 @@ fun handleTree(tree: Tree): Tree {
         }
     }
     return newTree
+}
+
+fun Property<*>.toRadioButton(option: Option<Boolean>, options: Array<String>): Property<Int> {
+    val newProperty = Properties.functional(
+        { if (option.pendingValue()) 1 else 0 },
+        { option.requestSet(it == 1) },
+        this.id,
+        this.title,
+        type = Int::class.java
+    )
+    newProperty.category = this.category
+    newProperty.subcategory = this.subcategory
+    newProperty.addMetadata("default", this.getMetadata("default"))
+    newProperty.addMetadata("options", options)
+    newProperty.addMetadata("visualizer", Visualizer.RadioVisualizer::class.java)
+    return newProperty
 }
 
 fun createMap() = try {
