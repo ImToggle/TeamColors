@@ -30,7 +30,7 @@ val isHitboxEnabled
 val isNametagEnabled
     get() = settings.nametag.enabled
 
-val useHSL = true
+val useHSL = false
 
 private fun getColors(): List<Int> {
     //? if >=26.2 {
@@ -154,7 +154,7 @@ fun Int.modifySB(cfgEntry: ConfigEntry): Int {
     Color.RGBtoHSB(this.red(), this.green(), this.blue(), hsb)
     hsb[1] = modify(hsb[1], cfgEntry.saturation)
     hsb[2] = modify(hsb[2], cfgEntry.brightness)
-    return Color.HSBtoRGB(hsb[0], hsb[1], hsb[2])
+    return Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]) and 0x00FFFFFF
 }
 
 fun getHitboxColor(entity: Entity): Int {

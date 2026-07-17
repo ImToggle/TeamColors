@@ -79,7 +79,7 @@ fun handleTree(tree: Tree): Tree {
 
 fun Property<*>.toRadioButton(option: Option<Boolean>, options: Array<String>): Property<Int> {
     val newProperty = Properties.functional(
-        { if (option.pendingValue()) 1 else 0 },
+        { if (option.binding().value) 1 else 0 },
         { option.requestSet(it == 1) },
         this.id,
         this.title,

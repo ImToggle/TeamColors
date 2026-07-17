@@ -80,13 +80,13 @@ class ModMenuIntegration : ModMenuApi {
 
     override fun getModConfigScreenFactory(): ConfigScreenFactory<*> {
         return ConfigScreenFactory { parentScreen ->
-            val yacl = YetAnotherConfigLib.create(ModConfig.CONFIG) { default, current, builder -> builder
+            return@ConfigScreenFactory YetAnotherConfigLib.create(ModConfig.CONFIG) { default, current, builder -> builder
                 .title(Component.literal("TeamColors"))
                 .buildCategory("Hitbox", default.config.hitbox, current.config.hitbox)
                 .buildCategory("Nametag", default.config.nametag, current.config.nametag)
-            }
-            currentInstance = yacl
-            return@ConfigScreenFactory yacl.generateScreen(parentScreen)
+            }.apply {
+                currentInstance = this
+            }.generateScreen(parentScreen)
         }
     }
 }
