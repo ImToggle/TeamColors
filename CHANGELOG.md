@@ -1,7 +1,5 @@
-### Added
-
-- Now compatible with PolyHitbox & PolyNametag
-
 ### Fixed
 
-- Fix nametag color with Entity Culling
+- Color preview in OneConfig menu
+- Mode switch text in OneConfig menu
+- Scoreboard nametag color not being applied in some versions

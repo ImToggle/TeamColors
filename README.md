@@ -32,6 +32,10 @@ Config Menu
 
 ![Config Menu](https://github.com/ImToggle/TeamColors/blob/main/gallery/ConfigMenu.png?raw=true)
 
+With OneConfig
+
+![OneConfig Menu](https://github.com/ImToggle/TeamColors/blob/main/gallery/OneConfigMenu.png?raw=true)
+
 With PolyHitbox & PolyNametag
 
 ![With PolyHitbox & PolyNametag](https://github.com/ImToggle/TeamColors/blob/main/gallery/polymods.png?raw=true)
