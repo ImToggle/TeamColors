@@ -14,11 +14,11 @@ Supported Versions
 
 Compatible Mods
 
-- [Combat Hitboxes by sootysplash](https://modrinth.com/mod/combat-hitboxes)
-- [Hitbox+ by PingIsFun](https://modrinth.com/mod/hitboxplus)
-- [Nametag Tweaks by Microcontrollers](https://modrinth.com/mod/nametagtweaks)
-- [PolyHitbox by the Polyfrost Team](https://modrinth.com/mod/hitbox)
-- [PolyNametag by the Polyfrost Team](https://modrinth.com/mod/polynametag)
+- [Combat Hitboxes](https://modrinth.com/mod/combat-hitboxes) by sootysplash
+- [Hitbox+](https://modrinth.com/mod/hitboxplus) by PingIsFun
+- [Nametag Tweaks](https://modrinth.com/mod/nametagtweaks) by Microcontrollers
+- [PolyHitbox](https://modrinth.com/mod/hitbox) by the Polyfrost Team
+- [PolyNametag](https://modrinth.com/mod/polynametag) by the Polyfrost Team
 
 [**Create issues here for more version/mod support!**](https://github.com/ImToggle/TeamColors/issues)
 
