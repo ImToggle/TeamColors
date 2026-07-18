@@ -15,9 +15,9 @@ import org.polyfrost.oneconfig.api.config.v1.dsl.noCache
 import org.polyfrost.oneconfig.api.config.v1.dsl.saveFunction
 import org.polyfrost.oneconfig.api.config.v1.dsl.subcategory
 import org.polyfrost.oneconfig.api.config.v1.internal.ConfigVisualizer
+import java.util.UUID
 
 fun handleTree(tree: Tree): Tree {
-    val categories = arrayOf("Hitbox", "Nametag")
     val newTree = Tree.tree()
     newTree.id = tree.id
     newTree.title = tree.title
@@ -26,53 +26,52 @@ fun handleTree(tree: Tree): Tree {
         newTree.saveFunction = tree.saveFunction
     }
     newTree.addMetadata("icon_path", tree.getMetadata("icon_path"))
-    var optionGroups:  ImmutableList<OptionGroup>? = null
+    var optionGroups: ImmutableList<OptionGroup>? = null
     var enabled: Property<*>? = null
+    var group: Tree? = null
     tree.onAll { _, node ->
-        val group = node as Tree
-        if (node.title in categories) {
-            optionGroups = currentInstance!!.categories()[if (node.title == "Hitbox") 0 else 1].groups()
-            group.onAll { _, node ->
-                when (node.title) {
-                    "Enabled" -> {
-                        enabled = node as Property<*>
-                    }
-                    "Color Preview" -> {
-                        val property = node as Property<*>
-                        property.addMetadata("visualizer", PreviewVisualizer::class.java)
-                        @Suppress("UNCHECKED_CAST")
-                        enabled?.let { property.addDisplayCondition(it as Property<Boolean>, false) }
-                    }
-                }
-                node.subcategory = ConfigVisualizer.DEFAULT_SUBCATEGORY
-                newTree.put(node)
+        var property = node as Property<*>
+        var shouldAdd = true
+        when (node.title) {
+            "Enabled" -> {
+                enabled = property
+                optionGroups = currentInstance!!.categories()[if (property.category == "Hitbox") 0 else 1].groups()
             }
-        } else {
-            @Suppress("UNCHECKED_CAST")
-            val option = optionGroups?.get(if (group.title == "Saturation") 1 else 2)?.options()[0] as? Option<Boolean>
-            val groupTree = Tree.tree()
-            groupTree.id = group.id
-            groupTree.title = group.title
-            groupTree.category = group.category
-            groupTree.subcategory = group.subcategory
-            group.onAll { _, node ->
-                var property = node as Property<*>
-                when (property.title) {
-                    "Mode" -> option?.let {
-                        property = property.toRadioButton(it, arrayOf("Multiplier", "Absolute"))
-                    }
-                }
+            "Color Preview" -> {
+                property.addMetadata("visualizer", PreviewVisualizer::class.java)
+            }
+            "Mode" -> {
+                shouldAdd = false
                 @Suppress("UNCHECKED_CAST")
-                enabled?.let { property.addDisplayCondition(it as Property<Boolean>, false) }
+                val option = optionGroups?.get(if (property.subcategory == "Saturation") 1 else 2)?.options()[0] as? Option<Boolean>
+                option?.let {
+                    property = property.toRadioButton(it, arrayOf("Multiplier", "Absolute"))
+                }
                 property.addCallback {
                     updateColors()
                     return@addCallback false
                 }
-                groupTree.put(property)
+                group = Tree.tree(UUID.randomUUID().toString())
+                group.title = property.subcategory
+                group.category = property.category
+                group.put(property)
             }
-
-            newTree.put(groupTree)
+            "Value" -> {
+                shouldAdd = false
+                property.addCallback {
+                    updateColors()
+                    return@addCallback false
+                }
+                group!!.put(property)
+                newTree.put(group)
+            }
         }
+        property.subcategory = ConfigVisualizer.DEFAULT_SUBCATEGORY
+        if (property != enabled) {
+            @Suppress("UNCHECKED_CAST")
+            enabled?.let { property.addDisplayCondition(it as Property<Boolean>, false) }
+        }
+        if (shouldAdd) newTree.put(property)
     }
     return newTree
 }
