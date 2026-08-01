@@ -1,3 +1,3 @@
 ### Fixed
 
-- Errors when OneConfig parses config instance
+- Crashes with PolyNametag

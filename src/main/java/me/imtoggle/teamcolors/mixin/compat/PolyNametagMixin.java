@@ -19,7 +19,17 @@ public class PolyNametagMixin {
     @Dynamic("PolyNametag")
     @TargetHandler(mixin = "org.polyfrost.polynametag.mixin.client.Mixin_RenderBackgroundShape", name = "polynametag$drawShapedBackground")
     @WrapOperation(method = "@MixinSquared:Handler", at = @At(value = "INVOKE", target = "Lorg/polyfrost/polynametag/client/NametagRenderer;backgroundArgb()I"))
-    private int applyColor(Operation<Integer> original, @Local(argsOnly = true) Component text) {
+    private int applyColor(
+            Operation<Integer> original,
+            //? if >= 26.2 {
+            @Local net.minecraft.client.renderer.feature.NameTagFeatureRenderer.Submit submit
+            //? } else {
+            /*@Local(argsOnly = true) Component text
+            *///? }
+    ) {
+        //? if >= 26.2 {
+        Component text = submit.text();
+        //? }
         int color = original.call();
         if (text instanceof TagComponent tagComponent) {
             color = Util.getNametagColor(tagComponent.getTeamColor()) | (color & 0xFF000000);
