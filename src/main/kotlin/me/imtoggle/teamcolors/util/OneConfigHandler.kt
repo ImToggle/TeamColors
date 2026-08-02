@@ -92,11 +92,11 @@ fun Property<*>.toRadioButton(option: Option<Boolean>, options: Array<String>): 
     return newProperty
 }
 
-fun createMap() = try {
+fun <K, V> createMap() = try {
     val clazz = Class.forName("androidx.compose.runtime.SnapshotStateKt")
     val method = clazz.getMethod("mutableStateMapOf")
     @Suppress("UNCHECKED_CAST")
-    method.invoke(null) as androidx.compose.runtime.snapshots.SnapshotStateMap<Int, Int>
+    method.invoke(null) as androidx.compose.runtime.snapshots.SnapshotStateMap<K, V>
 } catch (e: Exception) {
     e.printStackTrace()
     mutableMapOf()

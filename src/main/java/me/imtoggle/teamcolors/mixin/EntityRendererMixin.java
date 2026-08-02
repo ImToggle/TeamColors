@@ -34,7 +34,7 @@ public class EntityRendererMixin {
     private Component getDisplayName(Entity entity, Operation<Component> original) {
         Component component = original.call(entity);
         if (!Util.isNametagEnabled() || !Util.hasTeamColor(entity)) return component;
-        return new TagComponent(component, Util.getTeamColor(entity));
+        return new TagComponent(component, Util.getNametagColor(entity));
     }
     *///? }
 }

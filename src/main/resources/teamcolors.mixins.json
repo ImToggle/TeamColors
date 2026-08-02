@@ -20,5 +20,8 @@
     "compat.PolyHitboxMixin",
     "compat.PolyNametagMixin",
     "compat.PolyNametagRendererMixin"
+  ],
+  "mixins": [
+    "PlayerTeamMixin"
   ]
 }

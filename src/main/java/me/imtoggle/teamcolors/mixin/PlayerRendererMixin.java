@@ -38,14 +38,14 @@ public class PlayerRendererMixin {
     private void addTag(@Coerce Entity entity, PlayerRenderState state, float f, CallbackInfo ci) {
         ^///? }
         if (state.scoreText == null || !Util.isNametagEnabled() || !Util.hasTeamColor(entity)) return;
-        state.scoreText = new TagComponent(state.scoreText, Util.getTeamColor(entity));
+        state.scoreText = new TagComponent(state.scoreText, Util.getNametagColor(entity));
     }
     //? } else {
     /^@ModifyArg(method = "renderNameTag(Lnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/network/chat/Component;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IF)V",
     at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;renderNameTag(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/network/chat/Component;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IF)V", ordinal = 0), index = 1)
     private Component addTag(Component component, @Local(argsOnly = true) AbstractClientPlayer entity) {
         if (!Util.isNametagEnabled() || !Util.hasTeamColor(entity)) return component;
-        return new TagComponent(component, Util.getTeamColor(entity));
+        return new TagComponent(component, Util.getNametagColor(entity));
     }
     ^///? }
     *///? }

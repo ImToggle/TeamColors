@@ -4,7 +4,7 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.FormattedText
 import net.minecraft.network.chat.Style
 
-class TagComponent(val inputComponent: Component, val teamColor: Int) : Component by inputComponent {
+class TagComponent(val inputComponent: Component, val nametagColor: Int) : Component by inputComponent {
     override fun getString() = inputComponent.string
 
     override fun getString(limit: Int) = inputComponent.getString(limit)

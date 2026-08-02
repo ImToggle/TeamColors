@@ -12,8 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import me.imtoggle.teamcolors.util.hitboxMap
-import me.imtoggle.teamcolors.util.nametagMap
+import me.imtoggle.teamcolors.util.colorMap
 import me.imtoggle.teamcolors.util.vanillaColors
 import org.polyfrost.oneconfig.api.config.v1.Property
 import org.polyfrost.oneconfig.api.config.v1.Visualizer
@@ -36,8 +35,15 @@ class PreviewVisualizer : Visualizer {
                         val color = Color(
                             when {
                                 i == 0 -> vanillaColor
-                                isHitbox -> hitboxMap[vanillaColor] ?: vanillaColor
-                                else -> nametagMap[vanillaColor] ?: vanillaColor
+                                else -> {
+                                    colorMap[vanillaColor]?.let {
+                                        if (isHitbox) {
+                                            it.hitboxColor
+                                        } else {
+                                            it.nametagColor
+                                        }
+                                    } ?: vanillaColor
+                                }
                             } or 0xFF000000.toInt()
                         )
                         Box(

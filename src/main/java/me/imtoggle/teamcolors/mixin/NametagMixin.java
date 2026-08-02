@@ -36,7 +36,7 @@ public class NametagMixin {
     private void captureColor(CallbackInfo ci, @Local(argsOnly = true) Component name) {
         Util.hasTeam = name instanceof TagComponent;
         if (Util.hasTeam) {
-            Util.tagColor = Util.getNametagColor(((TagComponent) name).getTeamColor());
+            Util.tagColor = ((TagComponent) name).getNametagColor();
         }
     }
 

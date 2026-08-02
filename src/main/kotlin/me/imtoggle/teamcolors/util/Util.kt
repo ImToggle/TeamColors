@@ -4,7 +4,9 @@ package me.imtoggle.teamcolors.util
 
 import dev.isxander.yacl3.api.YetAnotherConfigLib
 import me.imtoggle.teamcolors.config.ModConfig
+import me.imtoggle.teamcolors.hook.PlayerTeamHook
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.scores.Team
 import java.awt.Color
 import kotlin.math.abs
 
@@ -18,8 +20,7 @@ var currentInstance: YetAnotherConfigLib? = null
 
 val vanillaColors = getColors()
 
-var hitboxMap = mutableMapOf<Int, Int>()
-var nametagMap = mutableMapOf<Int, Int>()
+var colorMap = mutableMapOf<Int, ColorEntry>()
 
 val settings
     get() = ModConfig.CONFIG.instance().config
@@ -40,12 +41,16 @@ private fun getColors(): List<Int> {
     *///? }
 }
 
+fun ColorEntry.update(color: Int) {
+    hitboxColor = calculateColor(color, settings.hitbox)
+    nametagColor = calculateColor(color, settings.nametag)
+}
+
 fun updateColors() {
-    hitboxMap.clear()
-    nametagMap.clear()
     for (color in vanillaColors) {
-        hitboxMap[color] = calculateColor(color, settings.hitbox)
-        nametagMap[color] = calculateColor(color, settings.nametag)
+        colorMap.getOrPut(color) { ColorEntry() }.apply {
+            update(color)
+        }
     }
 }
 
@@ -58,25 +63,25 @@ fun Entity.hasTeamColor(): Boolean {
     *///? }
 }
 
-fun getTeamColor(entity: Entity): Int {
+fun getTeamColor(team: Team): Int {
     //? if >= 26.2 {
-    return entity.team!!.color.get().rgb()
+    return team.color.get().rgb()
     //? } else {
-    /*return entity.team!!.color.color ?: -1
+    /*return team.color.color!!
     *///? }
 }
 
 //? if >= 1.21.4 {
 fun handleState(entity: Entity, state: net.minecraft.client.renderer.entity.state.EntityRenderState) {
     if (!isNametagEnabled || !entity.hasTeamColor()) return
-    val teamColor = getTeamColor(entity)
+    val nametagColor = getNametagColor(entity)
     //? if >= 26.1 {
     if (state.scoreText != null) {
-        state.scoreText = TagComponent(state.scoreText!!, teamColor)
+        state.scoreText = TagComponent(state.scoreText!!, nametagColor)
     }
     //? }
     if (state.nameTag != null) {
-        state.nameTag = TagComponent(state.nameTag!!, teamColor)
+        state.nameTag = TagComponent(state.nameTag!!, nametagColor)
     }
 }
 //? }
@@ -158,19 +163,15 @@ fun Int.modifySB(cfgEntry: ConfigEntry): Int {
 }
 
 fun getHitboxColor(entity: Entity): Int {
-    return hitboxMap[getTeamColor(entity)] ?: -1
-}
-
-fun getHitboxColor(rgb: Int): Int {
-    return hitboxMap[rgb] ?: rgb
+    return (entity.team!! as PlayerTeamHook).`teamColors$getColorEntry`().hitboxColor
 }
 
 fun getNametagColor(entity: Entity): Int {
-    return nametagMap[getTeamColor(entity)] ?: -1
+    return (entity.team!! as PlayerTeamHook).`teamColors$getColorEntry`().nametagColor
 }
 
-fun getNametagColor(rgb: Int): Int {
-    return nametagMap[rgb] ?: rgb
+fun getColorEntry(color: Int): ColorEntry {
+    return colorMap[color]!!
 }
 
 data class Entry(var mode: Boolean = false, var value: Int = 100)

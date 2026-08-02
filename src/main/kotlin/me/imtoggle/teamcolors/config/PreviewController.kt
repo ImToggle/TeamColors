@@ -6,8 +6,7 @@ import dev.isxander.yacl3.api.utils.Dimension
 import dev.isxander.yacl3.gui.AbstractWidget
 import dev.isxander.yacl3.gui.YACLScreen
 import dev.isxander.yacl3.gui.controllers.ControllerWidget
-import me.imtoggle.teamcolors.util.hitboxMap
-import me.imtoggle.teamcolors.util.nametagMap
+import me.imtoggle.teamcolors.util.colorMap
 import me.imtoggle.teamcolors.util.settings
 import me.imtoggle.teamcolors.util.vanillaColors
 import net.minecraft.client.gui.GuiGraphicsExtractor
@@ -58,9 +57,16 @@ class PreviewController(private val option: Option<Boolean>) : Controller<Boolea
             var x = dimension.x() + 2
             val y1 = dimension.y() + dimension.height() / 2
             for (color in vanillaColors) {
+                val finalColor = colorMap[color]?.let {
+                    return@let if (isHitbox) {
+                        it.hitboxColor
+                    } else {
+                        it.nametagColor
+                    }
+                } ?: color
                 val w = if (extra > 0) width + 1 else width
                 graphics.fill(x, dimension.y() + 2, x + w, y1, color or 0xFF000000.toInt())
-                graphics.fill(x, y1, x + w, dimension.yLimit() - 2, ((if (isHitbox) hitboxMap[color] else nametagMap[color]) ?: color) or 0xFF000000.toInt())
+                graphics.fill(x, y1, x + w, dimension.yLimit() - 2, finalColor or 0xFF000000.toInt())
                 x += w
                 extra--
             }

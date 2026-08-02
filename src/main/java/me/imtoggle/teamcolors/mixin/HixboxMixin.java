@@ -28,7 +28,7 @@ public class HixboxMixin {
     @ModifyConstant(method = "showHitboxes", constant = @Constant(intValue = -1, ordinal = 0))
     private int setColor(int value, @Local(ordinal = 0, argsOnly = true) Entity entity) {
         if (!Util.isHitboxEnabled() || !Util.hasTeamColor(entity)) return value;
-        return Util.getHitboxColor(entity);
+        return Util.getHitboxColor(entity) | 0xFF000000;
     }
     //? } elif >= 1.21.8 {
     /*@WrapOperation(method = "extractHitboxes(Lnet/minecraft/world/entity/Entity;FZ)Lnet/minecraft/client/renderer/entity/state/HitboxesRenderState;", at = @At(value = "NEW", target = "(DDDDDDFFF)Lnet/minecraft/client/renderer/entity/state/HitboxRenderState;", ordinal = 1))

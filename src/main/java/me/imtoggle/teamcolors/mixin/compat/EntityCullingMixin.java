@@ -39,7 +39,7 @@ public class EntityCullingMixin {
     @WrapOperation(method = "@MixinSquared:Handler", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;getDisplayName()Lnet/minecraft/network/chat/Component;"))
     private Component applyTag(Component component, @Local(argsOnly = true) Entity entity) {
         if (!Util.isNametagEnabled() || !Util.hasTeamColor(entity)) return component;
-        return new TagComponent(component, Util.getTeamColor(entity));
+        return new TagComponent(component, Util.getNametagColor(entity));
     }
     *///? }
 }

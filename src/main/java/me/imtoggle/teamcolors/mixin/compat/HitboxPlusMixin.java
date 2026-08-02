@@ -1,6 +1,8 @@
 package me.imtoggle.teamcolors.mixin.compat;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import me.imtoggle.teamcolors.util.Util;
+import net.minecraft.world.scores.Team;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -14,9 +16,9 @@ public class HitboxPlusMixin {
 
     @Dynamic("HitBoxPlus")
     @Inject(method = "teamColor", at = @At("RETURN"), cancellable = true)
-    private static void modifySB(CallbackInfoReturnable<Integer> cir) {
+    private static void modifySB(CallbackInfoReturnable<Integer> cir, @Local Team team) {
         if (!Util.isHitboxEnabled() || cir.getReturnValue() == null) return;
-        cir.setReturnValue(Util.getHitboxColor(cir.getReturnValue()));
+        cir.setReturnValue(Util.getColorEntry(Util.getTeamColor(team)).getHitboxColor());
     }
 
 }

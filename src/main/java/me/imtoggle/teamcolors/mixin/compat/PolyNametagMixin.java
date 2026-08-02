@@ -5,7 +5,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import me.imtoggle.teamcolors.util.TagComponent;
-import me.imtoggle.teamcolors.util.Util;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,7 +31,7 @@ public class PolyNametagMixin {
         //? }
         int color = original.call();
         if (text instanceof TagComponent tagComponent) {
-            color = Util.getNametagColor(tagComponent.getTeamColor()) | (color & 0xFF000000);
+            color = tagComponent.getNametagColor() | (color & 0xFF000000);
         }
         return color;
     }
