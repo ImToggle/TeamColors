@@ -1,3 +1,3 @@
-### Fixed
+### Improvements
 
-- Crashes with PolyNametag
+- Getting color are more efficient
