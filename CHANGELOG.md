@@ -1,3 +1,3 @@
-### Improvements
+### Changes
 
-- Getting color are more efficient
+- implemented PolyHitbox's hitbox color api
