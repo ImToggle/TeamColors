@@ -28,6 +28,7 @@ public class PlayerTeamMixin implements PlayerTeamHook {
 
     @Inject(method = "setColor", at = @At("TAIL"))
     private void insertColorEntry1(CallbackInfo ci) {
+        if (!Util.hasTeamColor((PlayerTeam) (Object) this)) return;
         colorEntry = Util.getColorEntry(Util.getTeamColor((PlayerTeam) (Object) this));
     }
 

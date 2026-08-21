@@ -18,7 +18,6 @@ public class TeamColorsMixinPlugin implements IMixinConfigPlugin {
             "HitboxPlusMixin", "hitboxplus",
             "NametagTweaksMixin", "nametagtweaks",
             "OneConfigMixin", "oneconfig",
-            "PolyHitboxMixin", "polyhitbox",
             "PolyNametagMixin", "polynametag",
             "PolyNametagRendererMixin", "polynametag"
     );

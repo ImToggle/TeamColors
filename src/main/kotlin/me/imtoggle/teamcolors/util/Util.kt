@@ -63,6 +63,14 @@ fun Entity.hasTeamColor(): Boolean {
     *///? }
 }
 
+fun Team.hasTeamColor(): Boolean {
+    //? if >= 26.2 {
+    return this.color.isPresent
+    //? } else {
+    /*return this.color.color != null
+    *///? }
+}
+
 fun getTeamColor(team: Team): Int {
     //? if >= 26.2 {
     return team.color.get().rgb()
@@ -85,6 +93,8 @@ fun handleState(entity: Entity, state: net.minecraft.client.renderer.entity.stat
     }
 }
 //? }
+
+fun Int.alphaMask() = this and 0xFF000000.toInt()
 
 fun Int.red() = this and 0x00FF0000 shr 16
 

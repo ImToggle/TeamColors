@@ -76,6 +76,8 @@ dependencies {
         modImplementation("org.polyfrost.oneconfig:${module}:$oneconfigversion")
     }
 
+    modImplementation(files(rootProject.file("libs/polyhitbox/1.2.1+26.2.jar")))
+
 }
 
 loom {
