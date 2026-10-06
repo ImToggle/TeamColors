@@ -1,26 +1,11 @@
 {
   "required": true,
   "package": "me.imtoggle.teamcolors.mixin",
-  "plugin": "me.imtoggle.teamcolors.TeamColorsMixinPlugin",
-  "compatibilityLevel": "${java}",
-  "refmap": "teamcolors.refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ExampleMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "client": [
-    "EntityRendererMixin",
-    "HixboxMixin",
-    "NametagMixin",
-    "PlayerRendererMixin",
-    "compat.CombatHitboxesMixin",
-    "compat.EntityCullingMixin",
-    "compat.HitboxPlusMixin",
-    "compat.NametagTweaksMixin",
-    "compat.OneConfigMixin",
-    "compat.PolyNametagMixin",
-    "compat.PolyNametagRendererMixin"
-  ],
-  "mixins": [
-    "PlayerTeamMixin"
-  ]
+  }
 }

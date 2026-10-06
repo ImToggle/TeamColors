@@ -2,24 +2,36 @@ plugins {
     id("dev.kikugie.stonecutter")
 }
 
-stonecutter active "26.2.x"
+stonecutter active "26.3"
 
-stonecutter parameters {
-    swaps["mod_version"] = "\"${property("mod.version")}\";"
-    swaps["minecraft"] = "\"${node.metadata.version}\";"
-    dependencies["fapi"] = node.project.property("deps.fabric_api") as String
+stonecutter {
+    tasks {
+        order("publishModrinth")
+    }
 
-    replacements {
-        string(current.parsed >= "1.21.11") {
-            replace("ResourceLocation", "Identifier")
+    parameters {
+        replacements {
+            string(eval(current.version, "= 1.8.9")) {
+                replace(
+                    "com.mojang.blaze3d.platform.InputConstants",
+                    "org.polyfrost.oneconfig.internal.legacy.InputConstants"
+                )
+                replace(
+                    "net.minecraft.server.Bootstrap",
+                    "net.minecraft.Bootstrap"
+                )
+                replace(
+                    "net.minecraft.client.player.KeyboardInput",
+                    "net.minecraft.client.entity.living.player.KeyboardInput"
+                )
+                replace(
+                    "net.minecraft.world.entity.Entity",
+                    "net.minecraft.entity.Entity"
+                )
+            }
+            string(current.parsed < "26.1") {
+                replace("classTweaker v1 official", "classTweaker v1 named")
+            }
         }
-
-        string(current.parsed >= "26.1") {
-            replace("GuiGraphics", "GuiGraphicsExtractor")
-        }
-
-//        string(current.parsed >= "26.1") {
-//            replace("classTweaker v2 named", "classTweaker v2 official")
-//        }
     }
 }
