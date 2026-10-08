@@ -19,7 +19,7 @@
     "client": [
       {
         "adapter": "kotlin",
-        "value": "me.imtoggle.template.TemplateMod"
+        "value": "me.imtoggle.teamcolors.TeamColors"
       }
     ]
   },

@@ -3,9 +3,13 @@
   "package": "me.imtoggle.teamcolors.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ExampleMixin"
+    "vanilla.team.PlayerTeamMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "client": [
+    "vanilla.nametag.EntityRendererMixin",
+    "vanilla.nametag.SubmitNodeCollectionMixin"
+  ]
 }
