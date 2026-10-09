@@ -1,20 +1,21 @@
 package me.imtoggle.teamcolors.mixin.vanilla.nametag;
 
-//? if >= 26.2 {
-import com.llamalad7.mixinextras.sugar.Local;
+//? if < 26.2 {
+/*import com.llamalad7.mixinextras.sugar.Local;
 import me.imtoggle.teamcolors.data.TagComponent;
 import me.imtoggle.teamcolors.util.RenderUtil;
-import net.minecraft.client.renderer.SubmitNodeCollection;
+import net.minecraft.client.renderer.feature.NameTagFeatureRenderer;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(SubmitNodeCollection.class)
-public class SubmitNodeCollectionMixin {
+@Mixin(NameTagFeatureRenderer.Storage.class)
+public class NametagFeatureRendererMixin {
 
-    @ModifyVariable(method = "submitNameTag", at = @At("STORE"), name = "backgroundColor")
-    private int setNametagColor(int backgroundColor, @Local(argsOnly = true, name = "name") Component name) {
+    //~ if < 26.1 'backgroundColor' -> 'k'
+    @ModifyVariable(method = "add", at = @At(value = "STORE"), name = "backgroundColor")
+    private int setNametagColor(int backgroundColor, @Local(argsOnly = true) Component name) {
         RenderUtil.tagColor = null;
         if (name instanceof TagComponent tagComponent) {
             RenderUtil.tagColor = tagComponent.getNametagColor();
@@ -24,4 +25,4 @@ public class SubmitNodeCollectionMixin {
     }
 
 }
-//? }
+*///? }

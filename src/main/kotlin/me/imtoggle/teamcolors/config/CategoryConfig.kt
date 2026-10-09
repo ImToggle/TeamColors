@@ -14,7 +14,7 @@ class CategoryConfig(val id: String) {
     var enabled = false
 
     @PreviewOption
-    val preview = PreviewVisualizer.PreviewState(id, null)
+    val preview = PreviewVisualizer.PreviewState(id)
 
     var global = listOf("saturation", "brightness").associateWith { _ -> ConfigEntry() }
 

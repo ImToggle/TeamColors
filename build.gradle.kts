@@ -86,25 +86,17 @@ dependencies {
             }
             mappings(rootProject.file("mappings/feather-overrides.tiny"))
         })
-//        testCompileOnly("net.ornithemc.osl-gen2:entrypoints:${sc.properties["deps.osl_entrypoints"] as String}")
     } else {
         loomx.applyMojangMappings()
     }
 
     modImplementation("net.fabricmc:fabric-loader:$loaderversion")
     modImplementation("org.polyfrost.oneconfig:$mcversion-$loader:$oneconfigversion")
-//    for (module in arrayOf("commands", "config", "config-impl", "events", "internal", "ui", "utils", "hud")) {
-//        implementation("org.polyfrost.oneconfig:$module:$oneconfigversion")
-//    }
-//    implementation("org.polyfrost:polyui:${sc.properties.get<String>("deps.polyui")}")
 
     if (!isOrnithe) {
         val fapiversion: String = sc.properties["deps.fabric_api"]
         modImplementation("net.fabricmc.fabric-api:fabric-api:$fapiversion")
     }
-
-//    testImplementation("org.junit.jupiter:junit-jupiter:${sc.properties.get<String>("deps.junit")}")
-//    testImplementation("net.fabricmc:fabric-loader-junit:$loaderversion")
 }
 
 loom {
@@ -156,14 +148,6 @@ bloom {
 }
 
 tasks {
-//    test {
-//        useJUnitPlatform()
-//        testLogging {
-//            showStackTraces = true
-//            exceptionFormat = TestExceptionFormat.FULL
-//        }
-//    }
-
     processResources {
         val props = mapOf(
             "mod_id" to modid,

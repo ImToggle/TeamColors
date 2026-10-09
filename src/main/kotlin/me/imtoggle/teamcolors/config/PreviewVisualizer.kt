@@ -34,7 +34,7 @@ import org.polyfrost.oneconfig.internal.ui.themes.LocalTheme
 
 class PreviewVisualizer : Visualizer {
 
-    class PreviewState(var category: String, var currentColor: Int?)
+    class PreviewState(var category: String, var currentColor: Int? = null)
 
     @Composable
     override fun visualize(prop: Property<*>) {
@@ -103,11 +103,7 @@ class PreviewVisualizer : Visualizer {
                             val color = Color(
                                 when {
                                     i == 0 -> vanillaRGB
-                                    else -> {
-                                        colorMap[vanillaRGB]?.let {
-                                            it.colors[state.category] ?: vanillaRGB
-                                        } ?: vanillaRGB
-                                    }
+                                    else -> colorMap[vanillaRGB]?.colors[state.category]!!.rawArgb
                                 } or 0xFF000000.toInt()
                             )
                             Box(

@@ -1,7 +1,8 @@
 {
   "required": true,
-  "package": "me.imtoggle.teamcolors.mixin",
   "compatibilityLevel": "JAVA_21",
+  "package": "me.imtoggle.teamcolors.mixin",
+  "plugin": "me.imtoggle.teamcolors.plugin.TeamColorsMixinPlugin",
   "mixins": [
     "vanilla.team.PlayerTeamMixin"
   ],
@@ -9,7 +10,6 @@
     "defaultRequire": 1
   },
   "client": [
-    "vanilla.nametag.EntityRendererMixin",
-    "vanilla.nametag.SubmitNodeCollectionMixin"
+    "vanilla.nametag.EntityRendererMixin"
   ]
 }
