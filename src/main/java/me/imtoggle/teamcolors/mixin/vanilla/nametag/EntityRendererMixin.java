@@ -12,12 +12,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //? if < 1.21.11 {
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+/*import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import me.imtoggle.teamcolors.data.ColorEntry;
 import net.minecraft.client.renderer.entity.state.HitboxRenderState;
 import org.polyfrost.compose.render.PolyColor;
-//? }
+*///? }
 
 @Mixin(EntityRenderer.class)
 public class EntityRendererMixin {

@@ -62,7 +62,7 @@ private fun getVanilla(): Map<String, Int> {
         it.name.lowercase() to it.rgb()
     }
     //? } else {
-    /*return ChatFormatting.entries.filter { it.isColor && it.color != null }.associate {
+    /*return net.minecraft.ChatFormatting.entries.filter { it.isColor && it.color != null }.associate {
         it.name to it.color!!
     }
     *///? }
