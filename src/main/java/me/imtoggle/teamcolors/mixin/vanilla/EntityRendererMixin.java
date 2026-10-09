@@ -1,4 +1,4 @@
-package me.imtoggle.teamcolors.mixin.vanilla.nametag;
+package me.imtoggle.teamcolors.mixin.vanilla;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import me.imtoggle.teamcolors.util.NametagPackager;

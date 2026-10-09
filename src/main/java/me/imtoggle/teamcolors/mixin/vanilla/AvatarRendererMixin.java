@@ -1,4 +1,4 @@
-package me.imtoggle.teamcolors.mixin.vanilla.nametag;
+package me.imtoggle.teamcolors.mixin.vanilla;
 
 //? if <= 1.21.11 {
 /*import com.llamalad7.mixinextras.sugar.Local;

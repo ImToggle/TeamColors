@@ -1,9 +1,9 @@
-package me.imtoggle.teamcolors.mixin.vanilla.team;
+package me.imtoggle.teamcolors.mixin.vanilla;
 
 import me.imtoggle.teamcolors.data.ColorEntry;
 import me.imtoggle.teamcolors.hook.ColorHook;
 import me.imtoggle.teamcolors.util.ColorUtil;
-import net.minecraft.ChatFormatting;import net.minecraft.world.scores.PlayerTeam;
+import net.minecraft.world.scores.PlayerTeam;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

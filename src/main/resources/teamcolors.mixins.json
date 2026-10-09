@@ -4,12 +4,12 @@
   "package": "me.imtoggle.teamcolors.mixin",
   "plugin": "me.imtoggle.teamcolors.plugin.TeamColorsMixinPlugin",
   "mixins": [
-    "vanilla.team.PlayerTeamMixin"
+    "vanilla.PlayerTeamMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
-    "vanilla.nametag.EntityRendererMixin"
+    "vanilla.EntityRendererMixin"
   ]
 }

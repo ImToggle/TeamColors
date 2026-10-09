@@ -18,17 +18,17 @@ class TeamColorsMixinPlugin : IMixinConfigPlugin {
 
     override fun getMixins() = buildList {
         //? if >= 26.2 {
-        add("vanilla.nametag.SubmitNodeCollectionMixin")
+        add("vanilla.SubmitNodeCollectionMixin")
         //? } else {
-        /*add("vanilla.nametag.NametagFeatureRendererMixin")
+        /*add("vanilla.NametagFeatureRendererMixin")
         *///? }
 
         //? if <= 1.21.11 {
-        /*add("vanilla.nametag.AvatarRendererMixin")
+        /*add("vanilla.AvatarRendererMixin")
         *///? }
 
         //? if >= 1.21.11 {
-        add("vanilla.hitbox.EntityHitboxDebugRendererMixin")
+        add("vanilla.EntityHitboxDebugRendererMixin")
         //? }
     }
 

@@ -1,6 +1,7 @@
 package me.imtoggle.teamcolors.config
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.withInfiniteAnimationFrameNanos
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -22,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.isActive
 import me.imtoggle.teamcolors.util.colorMap
 import me.imtoggle.teamcolors.util.vanillaColors
 import org.polyfrost.oneconfig.api.config.v1.Property
@@ -103,7 +106,24 @@ class PreviewVisualizer : Visualizer {
                             val color = Color(
                                 when {
                                     i == 0 -> vanillaRGB
-                                    else -> colorMap[vanillaRGB]?.colors[state.category]!!.rawArgb
+                                    else -> {
+                                        val polyColor = colorMap[vanillaRGB]?.colors[state.category]!!
+                                        val animatedArgb by produceState(
+                                            initialValue = polyColor.argb,
+                                            key1 = polyColor
+                                        ) {
+                                            if (!polyColor.chroma) {
+                                                value = polyColor.rawArgb
+                                                return@produceState
+                                            }
+                                            while (isActive) {
+                                                withInfiniteAnimationFrameNanos { frameTimeNanos ->
+                                                    value = polyColor.argb
+                                                }
+                                            }
+                                        }
+                                        animatedArgb
+                                    }
                                 } or 0xFF000000.toInt()
                             )
                             Box(

@@ -1,4 +1,4 @@
-package me.imtoggle.teamcolors.mixin.vanilla.hitbox;
+package me.imtoggle.teamcolors.mixin.vanilla;
 
 //? if >= 1.21.11 {
 import com.llamalad7.mixinextras.sugar.Local;
@@ -19,7 +19,7 @@ public class EntityHitboxDebugRendererMixin {
         if (Util.isEnabled("hitbox") && Util.hasTeamColor(entity)) {
             ColorEntry entry = Util.getColorEntry(entity);
             if (entry != null) {
-                return entry.getColor("hitbox").getArgb();
+                return entry.getColor("hitbox").getArgb() | (mainColor & 0xFF000000);
             }
         }
         return mainColor;
