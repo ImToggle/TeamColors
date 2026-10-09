@@ -12,7 +12,7 @@ object NametagPackager {
         val nametag = component ?: return null
         if (!entity.hasTeamColor()) return component
         val entry = entity.getColorEntry() ?: return component
-        return TagComponent(nametag, entry.nametagColor)
+        return TagComponent(nametag, entry.getColor("nametag"))
     }
 
 }

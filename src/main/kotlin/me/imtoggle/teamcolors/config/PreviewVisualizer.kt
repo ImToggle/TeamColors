@@ -19,6 +19,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import me.imtoggle.teamcolors.util.colorMap
 import me.imtoggle.teamcolors.util.vanillaColors
@@ -38,6 +40,18 @@ class PreviewVisualizer : Visualizer {
     override fun visualize(prop: Property<*>) {
         val state = prop.getAs<PreviewState>()
         var selectedColor by remember { mutableStateOf(state.currentColor) }
+
+        fun setCurrentColor(newColor: Int?) {
+            state.currentColor = newColor
+            selectedColor = newColor
+            ModConfig.tree.onAll { _, node ->
+                if (node is Tree) {
+                    node.onAllProps { _, property ->
+                        property.revaluateDisplay()
+                    }
+                }
+            }
+        }
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -46,27 +60,18 @@ class PreviewVisualizer : Visualizer {
             if (selectedColor != null) {
                 Box(
                     modifier = Modifier
-                        .size(24.dp)
-                        .border(
-                            width = 1.dp,
-                            color = LocalTheme.current.borderColor,
-                            shape = LocalTheme.current.sideBarNavigationEntryShape
-                        )
+                        .width(40.dp)
+                        .pointerHoverIcon(PointerIcon.Hand)
                         .onClick(interactionSource) {
-                            state.currentColor = null
-                            selectedColor = null
-                            ModConfig.tree.onAll { _, node ->
-                                if (node is Tree) {
-                                    node.onAllProps { _, property ->
-                                        property.revaluateDisplay()
-                                    }
-                                }
-                            }
-                        }
+                            setCurrentColor(null)
+                        },
+                    contentAlignment = Alignment.Center,
                 ) {
+                    val isHovered by interactionSource.collectIsHoveredAsState()
+                    val color = if (isHovered) LocalTheme.current.textColor else LocalTheme.current.textColorSecondary
                     Icon("undo",
-                        color = LocalTheme.current.textColorSecondary,
-                        modifier = Modifier.size(24.dp)
+                        color = color,
+                        modifier = Modifier.size(16.dp)
                     )
                 }
             }
@@ -87,16 +92,9 @@ class PreviewVisualizer : Visualizer {
                         modifier = Modifier
                             .background(bgColor, shape = LocalTheme.current.sideBarNavigationEntryShape)
                             .width(40.dp).height(72.dp)
+                            .pointerHoverIcon(PointerIcon.Hand)
                             .onClick(interactionSource = interactionSource) {
-                                state.currentColor = vanillaRGB
-                                selectedColor = vanillaRGB
-                                ModConfig.tree.onAll { _, node ->
-                                    if (node is Tree) {
-                                        node.onAllProps { _, property ->
-                                            property.revaluateDisplay()
-                                        }
-                                    }
-                                }
+                                setCurrentColor(vanillaRGB)
                             },
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(8.dp, alignment = Alignment.CenterVertically)
@@ -107,11 +105,7 @@ class PreviewVisualizer : Visualizer {
                                     i == 0 -> vanillaRGB
                                     else -> {
                                         colorMap[vanillaRGB]?.let {
-                                            when (state.category) {
-                                                "Hitbox" -> it.hitboxColor
-                                                "Nametag" -> it.nametagColor
-                                                else -> vanillaRGB
-                                            }
+                                            it.colors[state.category] ?: vanillaRGB
                                         } ?: vanillaRGB
                                     }
                                 } or 0xFF000000.toInt()

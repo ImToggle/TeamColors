@@ -1,3 +1,12 @@
 package me.imtoggle.teamcolors.data
 
-data class ColorEntry(var hitboxColor: Int, var nametagColor: Int)
+import androidx.compose.runtime.toMutableStateMap
+import me.imtoggle.teamcolors.config.ModConfig
+
+class ColorEntry {
+
+    val colors = ModConfig.CATEGORIES.associateWith { _ -> 0 }.toList().toMutableStateMap()
+
+    fun getColor(category: String) = colors[category]!!
+
+}

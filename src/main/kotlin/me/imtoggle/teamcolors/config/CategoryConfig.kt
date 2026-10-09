@@ -1,9 +1,12 @@
 package me.imtoggle.teamcolors.config
 
+import me.imtoggle.teamcolors.util.capitalize
 import me.imtoggle.teamcolors.util.vanillaColors
 import org.polyfrost.oneconfig.api.config.v1.annotations.Switch
 
-class CategoryConfig(val name: String) {
+class CategoryConfig(val id: String) {
+
+    val name = id.capitalize()
 
     @Switch(
         title = "Enabled"
@@ -11,13 +14,10 @@ class CategoryConfig(val name: String) {
     var enabled = false
 
     @PreviewOption
-    var preview = PreviewVisualizer.PreviewState(name, null)
+    val preview = PreviewVisualizer.PreviewState(id, null)
 
-    var global = mapOf(
-        "Saturation" to ConfigEntry(),
-        "Brightness" to ConfigEntry()
-    )
+    var global = listOf("saturation", "brightness").associateWith { _ -> ConfigEntry() }
 
-    var individual = vanillaColors.map { (name, rgb) -> name to ColorConfig(rgb) }
+    var individual = vanillaColors.mapValues { (name, rgb) -> ColorConfig(rgb) }
 
 }
