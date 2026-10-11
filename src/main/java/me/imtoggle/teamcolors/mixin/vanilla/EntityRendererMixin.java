@@ -99,6 +99,7 @@ public class EntityRendererMixin {
     *///? } elif = 1.8.9 {
     /*@WrapOperation(method = "renderNameTag(Lnet/minecraft/world/entity/Entity;Ljava/lang/String;DDDI)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/vertex/BufferBuilder;color(FFFF)Lnet/minecraft/client/render/vertex/BufferBuilder;"))
     private net.minecraft.client.render.vertex.BufferBuilder setNametag(net.minecraft.client.render.vertex.BufferBuilder instance, float r, float g, float b, float a, Operation<net.minecraft.client.render.vertex.BufferBuilder> original, @Local(argsOnly = true) Entity entity) {
+        RenderUtil.tagColor = null;
         if (ModConfig.INSTANCE.getNametagCategory().getEnabled() && Util.hasTeamColor(entity)) {
             ColorEntry entry = Util.getColorEntry(entity);
             if (entry != null) {
