@@ -103,10 +103,6 @@ dependencies {
 
 loom {
     fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json")
-    accessWidenerPath = sc.process(
-        rootProject.file("src/main/resources/$modid.ct"),
-        "build/processed.ct"
-    )
 
     decompilerOptions.named("vineflower") {
         options.put("mark-corresponding-synthetics", "1")
@@ -198,6 +194,6 @@ publishMods {
         environment = CLIENT_ONLY
         minecraftVersions.addAll(compatibleVersions.ifEmpty { listOf(mcversion) })
 
-        requires("oneconfig", "fabric-api", "fabric-language-kotlin")
+        requires("oneconfig", "fabric-language-kotlin")
     }
 }

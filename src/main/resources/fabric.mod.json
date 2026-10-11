@@ -23,7 +23,6 @@
       }
     ]
   },
-  "accessWidener": "${mod_id}.ct",
   "mixins": [
     "${mod_id}.mixins.json"
   ],
