@@ -6,19 +6,16 @@ This client-side mod changes hitbox and nametag background color based on entity
 
 ## Features
 
-- Customizable color saturation & brightness
+- Global saturation & brightness
+- Individual color overrides
 
-## Compatibility
+## Supported Versions
 
-Supported Versions
+- Ornithe 1.8.9
+- Fabric 1.21.1 ~ 26.3
 
-- Fabric 1.21 ~ 26.2
+## Compatible Mods
 
-Compatible Mods
-
-- [Combat Hitboxes](https://modrinth.com/mod/combat-hitboxes) by sootysplash
-- [Hitbox+](https://modrinth.com/mod/hitboxplus) by PingIsFun
-- [Nametag Tweaks](https://modrinth.com/mod/nametagtweaks) by Microcontrollers
 - [PolyHitbox](https://modrinth.com/mod/hitbox) by the Polyfrost Team
 - [PolyNametag](https://modrinth.com/mod/polynametag) by the Polyfrost Team
 
@@ -26,17 +23,17 @@ Compatible Mods
 
 ## Screenshots
 
-Colored Hitbox & Nametag
+Global Settings
 
-![Colored Hitbox & Nametag](https://github.com/ImToggle/TeamColors/blob/main/gallery/hitbox&nametag.png?raw=true)
+![Config Menu](https://github.com/ImToggle/TeamColors/blob/main/gallery/menu-global.png?raw=true)
 
-Config Menu
+Individual Settings
 
-![Config Menu](https://github.com/ImToggle/TeamColors/blob/main/gallery/ConfigMenu.png?raw=true)
+![Individual Menu](https://github.com/ImToggle/TeamColors/blob/main/gallery/menu-individual.png?raw=true)
 
-With OneConfig
+Vanilla Hitbox & Nametag
 
-![OneConfig Menu](https://github.com/ImToggle/TeamColors/blob/main/gallery/OneConfigMenu.png?raw=true)
+![Colored Hitbox & Nametag](https://github.com/ImToggle/TeamColors/blob/main/gallery/vanilla.png?raw=true)
 
 With PolyHitbox & PolyNametag
 
