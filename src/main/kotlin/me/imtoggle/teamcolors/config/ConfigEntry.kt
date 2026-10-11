@@ -13,7 +13,7 @@ class ConfigEntry {
     var mode = 0
 
     @Slider(
-        title = " ",
+        title = "⠀",
         min = 0f, max = 100f,
         formatter = PercentageFormatter::class
     )
