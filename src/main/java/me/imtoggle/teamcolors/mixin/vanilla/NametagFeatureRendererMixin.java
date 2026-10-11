@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.feature.NameTagFeatureRenderer;
 import net.minecraft.network.chat.Component;
 //~ if < 26.1 'Matrix4fc' -> 'Matrix4f'
-import org.joml.Matrix4f;
+import org.joml.Matrix4fc;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -18,12 +18,12 @@ import org.spongepowered.asm.mixin.injection.At;
 public class NametagFeatureRendererMixin {
 
     //~ if < 26.1 'renderTranslucent' -> 'render'
-    @WrapOperation(method = "render", at = @At(
+    @WrapOperation(method = "renderTranslucent", at = @At(
             //~ if < 26.1 'Matrix4fc' -> 'Matrix4f'
-            value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawInBatch(Lnet/minecraft/network/chat/Component;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/gui/Font$DisplayMode;II)V"
+            value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawInBatch(Lnet/minecraft/network/chat/Component;FFIZLorg/joml/Matrix4fc;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/gui/Font$DisplayMode;II)V"
     ))
     //~ if < 26.1 'Matrix4fc' -> 'Matrix4f'
-    private void setNametagColor(Font instance, Component component, float x, float y, int color, boolean b, Matrix4f pose, MultiBufferSource multiBufferSource, Font.DisplayMode displayMode, int backgroundColor, int lightCoords, Operation<Void> original) {
+    private void setNametagColor(Font instance, Component component, float x, float y, int color, boolean b, Matrix4fc pose, MultiBufferSource multiBufferSource, Font.DisplayMode displayMode, int backgroundColor, int lightCoords, Operation<Void> original) {
         RenderUtil.tagColor = null;
         if (component instanceof TagComponent tagComponent) {
             RenderUtil.tagColor = tagComponent.getNametagColor();

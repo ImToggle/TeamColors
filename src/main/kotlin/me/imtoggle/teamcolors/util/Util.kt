@@ -19,18 +19,28 @@ fun pack(component: net.minecraft.network.chat.Component?, entity: Entity): net.
 }
 //? }
 
-fun Entity.hasTeamColor(): Boolean {
-    //? if >= 26.2 {
-    return team?.color?.isPresent ?: false
-    //? } elif > 1.8.9 {
-    /*return team?.color?.isColor ?: false
-    *///? } else {
-    /*if (this is LivingEntity) {
-        val team = scoreboardTeam ?: return false
-        return team is net.minecraft.world.scores.PlayerTeam && team.color.isColor
+//? if = 1.8.9 {
+/*val colorCodes = "0123456789abcdef"
+
+fun getFormattingID(prefix: String?): Int {
+    if (prefix == null || prefix.length < 2) return -1
+    for (i in prefix.length - 2 downTo 0) {
+        if (prefix[i] == '§') {
+            colorCodes.indexOf(prefix[i + 1].lowercaseChar()).let {
+                if (it != -1) return it
+            }
+        }
     }
-    return false
+    return -1
+}
+*///? }
+
+fun Entity.hasTeamColor(): Boolean {
+    //? if = 1.8.9 {
+    /*if (this !is LivingEntity) return false
+    val team = scoreboardTeam ?: return false
     *///? }
+    return (team as? PlayerTeamHook)?.`teamColors$hasColor`() ?: false
 }
 
 fun Entity.getColorEntry(): ColorEntry? {

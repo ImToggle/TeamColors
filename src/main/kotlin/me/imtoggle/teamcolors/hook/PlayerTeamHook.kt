@@ -4,8 +4,8 @@ import me.imtoggle.teamcolors.data.ColorEntry
 
 interface PlayerTeamHook {
 
-    fun `teamColors$getColorEntry`(): ColorEntry
+    fun `teamColors$getColorEntry`(): ColorEntry?
 
-    fun `teamColors$setColorEntry`(entry: ColorEntry)
+    fun `teamColors$hasColor`(): Boolean
 
 }
