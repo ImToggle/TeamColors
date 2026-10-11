@@ -3,13 +3,11 @@
   "compatibilityLevel": "JAVA_21",
   "package": "me.imtoggle.teamcolors.mixin",
   "plugin": "me.imtoggle.teamcolors.plugin.TeamColorsMixinPlugin",
-  "mixins": [
-    "vanilla.PlayerTeamMixin"
-  ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
-    "vanilla.EntityRendererMixin"
+    "vanilla.EntityRendererMixin",
+    "vanilla.PlayerTeamMixin"
   ]
 }

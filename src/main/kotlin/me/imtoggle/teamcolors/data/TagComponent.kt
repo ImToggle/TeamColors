@@ -1,5 +1,6 @@
 package me.imtoggle.teamcolors.data
 
+//? if > 1.8.9 {
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.FormattedText
 import net.minecraft.network.chat.Style
@@ -27,3 +28,6 @@ class TagComponent(val inputComponent: Component, val nametagColor: Int) : Compo
     override fun contains(other: Component) = inputComponent.contains(other)
 
 }
+//? } else {
+/*class TagComponent()
+*///? }

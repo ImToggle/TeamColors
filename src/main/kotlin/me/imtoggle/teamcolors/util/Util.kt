@@ -2,25 +2,43 @@
 
 package me.imtoggle.teamcolors.util
 
-import me.imtoggle.teamcolors.config.ModConfig
 import me.imtoggle.teamcolors.data.ColorEntry
-import me.imtoggle.teamcolors.hook.ColorHook
+import me.imtoggle.teamcolors.hook.PlayerTeamHook
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.LivingEntity
 
-fun isEnabled(category: String) = ModConfig.categoriesConfig[category]?.enabled == true
+@JvmField
+var hasPolyNametag = false
 
-fun isDisabled(category: String) = ModConfig.categoriesConfig[category]?.enabled == false
+//? if > 1.8.9 {
+fun pack(component: net.minecraft.network.chat.Component?, entity: Entity): net.minecraft.network.chat.Component? {
+    val nametag = component ?: return null
+    if (!entity.hasTeamColor()) return component
+    val entry = entity.getColorEntry() ?: return component
+    return me.imtoggle.teamcolors.data.TagComponent(nametag, entry.nametagColor.argb and 0x00FFFFFF)
+}
+//? }
 
 fun Entity.hasTeamColor(): Boolean {
     //? if >= 26.2 {
     return team?.color?.isPresent ?: false
-    //? } else {
+    //? } elif > 1.8.9 {
     /*return team?.color?.isColor ?: false
+    *///? } else {
+    /*if (this is LivingEntity) {
+        val team = scoreboardTeam ?: return false
+        return team is net.minecraft.world.scores.PlayerTeam && team.color.isColor
+    }
+    return false
     *///? }
 }
 
 fun Entity.getColorEntry(): ColorEntry? {
-    return (team as? ColorHook)?.`teamColors$getColorEntry`()
+    //? if = 1.8.9 {
+    /*if (this !is LivingEntity) return null
+    val team = scoreboardTeam ?: return null
+    *///? }
+    return (team as? PlayerTeamHook)?.`teamColors$getColorEntry`()
 }
 
 fun String.capitalize() = replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }

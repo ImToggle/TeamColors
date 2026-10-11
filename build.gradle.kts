@@ -57,12 +57,12 @@ repositories {
         forRepository { maven(url) { name = alias } }
         filter { groups.forEach(::includeGroup) }
     }
-
     mavenLocal()
     mavenCentral()
     google()
     maven("https://repo.polyfrost.org/releases") { name = "Polyfrost Releases" }
     maven("https://repo.polyfrost.org/snapshots") { name = "Polyfrost Snapshots" }
+    maven("https://redirector.kotlinlang.org/maven/compose-dev")
     maven("https://central.sonatype.com/repository/maven-snapshots") {
         name = "Sonatype Snapshots"
         content { includeGroup("net.kyori") }
@@ -92,6 +92,8 @@ dependencies {
 
     modImplementation("net.fabricmc:fabric-loader:$loaderversion")
     modImplementation("org.polyfrost.oneconfig:$mcversion-$loader:$oneconfigversion")
+    modImplementation("maven.modrinth:hitbox:v1.3.2-$loader,$mcversion")
+    modImplementation("maven.modrinth:polynametag:v1.2.2-$loader,$mcversion")
 
     if (!isOrnithe) {
         val fapiversion: String = sc.properties["deps.fabric_api"]

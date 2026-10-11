@@ -42,6 +42,7 @@ class PreviewVisualizer : Visualizer {
     @Composable
     override fun visualize(prop: Property<*>) {
         val state = prop.getAs<PreviewState>()
+        val isHitbox = state.category == "hitbox"
         var selectedColor by remember { mutableStateOf(state.currentColor) }
 
         fun setCurrentColor(newColor: Int?) {
@@ -107,7 +108,8 @@ class PreviewVisualizer : Visualizer {
                                 when {
                                     i == 0 -> vanillaRGB
                                     else -> {
-                                        val polyColor = colorMap[vanillaRGB]?.colors[state.category]!!
+                                        val colorEntry = colorMap[vanillaRGB]!!
+                                        val polyColor = if (isHitbox) colorEntry.hitboxColor else colorEntry.nametagColor
                                         val animatedArgb by produceState(
                                             initialValue = polyColor.argb,
                                             key1 = polyColor
@@ -117,7 +119,7 @@ class PreviewVisualizer : Visualizer {
                                                 return@produceState
                                             }
                                             while (isActive) {
-                                                withInfiniteAnimationFrameNanos { frameTimeNanos ->
+                                                withInfiniteAnimationFrameNanos { _ ->
                                                     value = polyColor.argb
                                                 }
                                             }

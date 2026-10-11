@@ -1,15 +1,14 @@
 package me.imtoggle.teamcolors.data
 
-import androidx.compose.runtime.toMutableStateMap
-import me.imtoggle.teamcolors.config.ModConfig
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import org.polyfrost.compose.render.PolyColor
 
 class ColorEntry {
 
-    val colors = ModConfig.CATEGORIES.associateWith { _ -> PolyColor() }.toList().toMutableStateMap()
+    var hitboxColor by mutableStateOf(PolyColor())
 
-    fun getColor(category: String): PolyColor {
-        return colors[category]!!
-    }
+    var nametagColor by mutableStateOf(PolyColor())
 
 }

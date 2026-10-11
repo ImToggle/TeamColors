@@ -14,8 +14,26 @@ val vanillaColors = getVanilla()
 
 val colorMap = vanillaColors.map { it.value to ColorEntry() }.toMap()
 
+//? if = 1.8.9 {
+/*var _legacyColors: IntArray? = null
+
+val legacyColors: IntArray
+    get() {
+        return _legacyColors ?: IntArray(16) { i ->
+            val j = (i shr 3 and 1) * 85
+            var k = (i shr 2 and 1) * 170 + j
+            val l = (i shr 1 and 1) * 170 + j
+            val i1 = (i shr 0 and 1) * 170 + j
+            if (i == 6) {
+                k += 85
+            }
+            return@IntArray (k and 255) shl 16 or ((l and 255) shl 8) or (i1 and 255)
+        }.also { _legacyColors = it }
+    }
+*///? }
+
 fun updateColorMap() {
-    ModConfig.categoriesConfig.values.forEach { category ->
+    ModConfig.categoriesConfig.forEach { category ->
         updateCategory(category)
     }
 }
@@ -28,10 +46,14 @@ fun updateCategory(category: CategoryConfig) {
 
 fun updateIndividual(category: CategoryConfig, vanillaRGB: Int, config: ColorConfig) {
     val colorEntry = colorMap[vanillaRGB] ?: return
-    colorEntry.colors[category.id] = if (config.overrideGlobal) {
+    val newColor = if (config.overrideGlobal) {
         config.color.copy()
     } else {
         PolyColor(modifySB(vanillaRGB, category))
+    }
+    when (category.id) {
+        "hitbox" -> colorEntry.hitboxColor = newColor
+        else -> colorEntry.nametagColor = newColor
     }
 }
 
@@ -62,8 +84,12 @@ private fun getVanilla(): Map<String, Int> {
         it.name.lowercase() to it.rgb()
     }
     //? } else {
-    /*return net.minecraft.ChatFormatting.entries.filter { it.isColor && it.color != null }.associate {
+    /*return net.minecraft.ChatFormatting.entries.filter { it.isColor }.associate {
+        //? if > 1.8.9 {
         it.name to it.color!!
+        //? } else {
+        /*it.name to legacyColors[it.id]
+        *///? }
     }
     *///? }
 }

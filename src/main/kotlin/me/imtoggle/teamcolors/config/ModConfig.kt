@@ -13,9 +13,11 @@ import org.polyfrost.oneconfig.api.config.v1.dsl.category
 
 object ModConfig : Config("teamcolors.json", "/assets/teamcolors/icon.png", "TeamColors", Category.VISUALS) {
 
-    val CATEGORIES = listOf("hitbox", "nametag")
+    val hitboxCategory = CategoryConfig("hitbox")
 
-    var categoriesConfig = CATEGORIES.associateWith { category -> CategoryConfig(category) }
+    val nametagCategory = CategoryConfig("nametag")
+
+    var categoriesConfig = listOf(hitboxCategory, nametagCategory)
 
     private fun handleGroup(
         tree: Tree, collector: OneConfigCollector,
@@ -62,7 +64,7 @@ object ModConfig : Config("teamcolors.json", "/assets/teamcolors/icon.png", "Tea
     override fun makeTree(): Tree? {
         val tree = super.makeTree()
         val collector = OneConfigCollector()
-        categoriesConfig.forEach { (_, category) ->
+        categoriesConfig.forEach { category ->
             val t = Tree.tree(category.name)
             collector.handle(t, category, 0)
             val enabled = t.getProp("enabled") as Property<Boolean>
@@ -96,7 +98,7 @@ object ModConfig : Config("teamcolors.json", "/assets/teamcolors/icon.png", "Tea
     override fun initialize(byConfigManager: Boolean) {
         super.initialize(byConfigManager)
         updateColorMap()
-        categoriesConfig.forEach { (_, config) ->
+        categoriesConfig.forEach { config ->
             config.preview.currentColor = null
         }
         tree.onAll { _, node ->

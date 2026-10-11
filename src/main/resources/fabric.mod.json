@@ -3,16 +3,16 @@
   "id": "${mod_id}",
   "version": "${mod_version}",
   "name": "${mod_name}",
-  "description": "",
+  "description": "Colorize hitbox and nametag background based on entity's team.",
   "authors": [
     "ImToggle"
   ],
   "contact": {
-    "homepage": "",
-    "sources": "",
-    "issues": ""
+    "homepage": "https://modrinth.com/mod/teamcolors",
+    "sources": "https://github.com/ImToggle/TeamColors",
+    "issues": "https://github.com/ImToggle/TeamColors/issues"
   },
-  "license": "",
+  "license": "GPL-3.0",
   "icon": "assets/${mod_id}/icon.png",
   "environment": "client",
   "entrypoints": {

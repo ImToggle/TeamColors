@@ -1,5 +1,6 @@
 package me.imtoggle.teamcolors.config
 
+import org.polyfrost.oneconfig.api.config.v1.ValueFormatter
 import org.polyfrost.oneconfig.api.config.v1.annotations.RadioButton
 import org.polyfrost.oneconfig.api.config.v1.annotations.Slider
 
@@ -12,9 +13,14 @@ class ConfigEntry {
     var mode = 0
 
     @Slider(
-        title = "%",
+        title = " ",
         min = 0f, max = 100f,
+        formatter = PercentageFormatter::class
     )
     var value = 100
+
+    private class PercentageFormatter : ValueFormatter {
+        override fun format(value: Number) = "$value%"
+    }
 
 }

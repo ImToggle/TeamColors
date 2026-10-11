@@ -1,7 +1,7 @@
 package me.imtoggle.teamcolors.mixin.vanilla;
 
 import me.imtoggle.teamcolors.data.ColorEntry;
-import me.imtoggle.teamcolors.hook.ColorHook;
+import me.imtoggle.teamcolors.hook.PlayerTeamHook;
 import me.imtoggle.teamcolors.util.ColorUtil;
 import net.minecraft.world.scores.PlayerTeam;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerTeam.class)
-public class PlayerTeamMixin implements ColorHook {
+public class PlayerTeamMixin implements PlayerTeamHook {
 
     @Unique
     private ColorEntry teamColors$colorEntry;
@@ -34,8 +34,9 @@ public class PlayerTeamMixin implements ColorHook {
     }
     //? } else {
     /*@Inject(method = "setColor", at = @At("HEAD"))
-    private void setEntry(ChatFormatting color, CallbackInfo ci) {
+    private void setEntry(net.minecraft.ChatFormatting color, CallbackInfo ci) {
         if (color.isColor()) {
+            //~ if = 1.8.9 'color.getColor()' -> 'ColorUtil.getLegacyColors()[color.getId()]'
             teamColors$colorEntry = ColorUtil.getColorMap().get(color.getColor());
         }
     }

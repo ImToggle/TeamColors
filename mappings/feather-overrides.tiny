@@ -1,18 +1,8 @@
 tiny	2	0	intermediary	named
-c	net/minecraft/client/Minecraft	net/minecraft/client/Minecraft
-	m	(Lnet/minecraft/unmapped/C_85740840;)V	m_52715402	setScreen
-c	net/minecraft/unmapped/C_23708450	net/minecraft/client/KeyMapping
-	m	()Z	m_70603120	isDown
-c	net/minecraft/unmapped/C_76792751	net/minecraft/client/Options
-	f	Lnet/minecraft/unmapped/C_23708450;	f_50204069	keySprint
-	f	Lnet/minecraft/unmapped/C_23708450;	f_89071996	keyShift
-	f	Lnet/minecraft/unmapped/C_23708450;	f_94470987	keyJump
-c	net/minecraft/unmapped/C_57778754	net/minecraft/client/player/LocalPlayer
-	f	I	f_61582337	sprintTriggerTime
-c	net/minecraft/unmapped/C_88014908	net/minecraft/client/multiplayer/ClientPacketListener
-c	net/minecraft/unmapped/C_06007608$C_36868821	net/minecraft/world/level/GameType
-	m	(Lnet/minecraft/unmapped/C_81721916;)V	m_88990945	updatePlayerAbilities
+c	net/minecraft/unmapped/C_32232284	net/minecraft/client/renderer/entity/EntityRenderDispatcher
+c	net/minecraft/unmapped/C_53593123	net/minecraft/client/renderer/entity/EntityRenderer
+c	net/minecraft/unmapped/C_71252617	net/minecraft/client/renderer/entity/LivingEntityRenderer
+c	net/minecraft/unmapped/C_42232651	net/minecraft/world/entity/Entity
 c	net/minecraft/unmapped/C_74425583	net/minecraft/world/entity/LivingEntity
-	m	()V	m_11642923	aiStep
-c	net/minecraft/unmapped/C_81721916	net/minecraft/world/entity/player/Abilities
-	f	Z	f_63336874	instabuild
+c	net/minecraft/unmapped/C_97595263	net/minecraft/world/scores/PlayerTeam
+c	net/minecraft/unmapped/C_49122968	net/minecraft/ChatFormatting
