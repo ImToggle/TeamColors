@@ -63,20 +63,25 @@ class PreviewVisualizer : Visualizer {
             val interactionSource = rememberInteractionSource()
             if (selectedColor != null) {
                 Box(
-                    modifier = Modifier
-                        .width(40.dp)
-                        .pointerHoverIcon(PointerIcon.Hand)
-                        .onClick(interactionSource) {
-                            setCurrentColor(null)
-                        },
+                    modifier = Modifier.width(40.dp),
                     contentAlignment = Alignment.Center,
                 ) {
-                    val isHovered by interactionSource.collectIsHoveredAsState()
-                    val color = if (isHovered) LocalTheme.current.textColor else LocalTheme.current.textColorSecondary
-                    Icon("undo",
-                        color = color,
-                        modifier = Modifier.size(16.dp)
-                    )
+                    Box(
+                        modifier = Modifier
+                            .size(24.dp)
+                            .pointerHoverIcon(PointerIcon.Hand)
+                            .onClick(interactionSource) {
+                                setCurrentColor(null)
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        val isHovered by interactionSource.collectIsHoveredAsState()
+                        val color = if (isHovered) LocalTheme.current.textColor else LocalTheme.current.textColorSecondary
+                        Icon("undo",
+                            color = color,
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
                 }
             }
             for (vanillaColor in vanillaColors) {
