@@ -58,6 +58,12 @@ class TeamColorsMixinPlugin : IMixinConfigPlugin {
             /*add("polynametag.RenderBackgroundShapeMixin")
             *///? }
         }
+
+        //? if > 1.8.9 {
+        if (FabricLoader.getInstance().isModLoaded("entityculling")) {
+            add("entityculling.WorldRendererMixin")
+        }
+        //? }
     }
 
     override fun preApply(targetClassName: String, targetClass: ClassNode, mixinClassName: String, mixinInfo: IMixinInfo) {
