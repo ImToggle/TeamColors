@@ -1,4 +1,10 @@
-[![kofi-singular-alt](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/donate/kofi-singular-alt_vector.svg)](https://ko-fi.com/imtoggle)
+<a href="https://ko-fi.com/imtoggle" target="_blank">
+  <img alt="kofi-singular-alt" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/donate/kofi-singular-alt_vector.svg">
+</a>
+
+<a href="https://modrinth.com/mod/oneconfig" target="_blank">
+  <img alt="oneconfig" height="56" src="https://polyfrost.org/media/branding/badges/badge_1.svg">
+</a>
 
 # TeamColors ![Modrinth Downloads](https://img.shields.io/modrinth/dt/5xTNlgA1?style=for-the-badge&logo=modrinth&color=4bab62&link=https%3A%2F%2Fmodrinth.com%2Fmod%2Fteamcolors)
 
