@@ -33,7 +33,7 @@ public class WorldRendererMixin {
     @TargetHandler(mixin = "dev.tr7zw.entityculling.mixin.WorldRendererMixin", name = "processNametag")
     @Inject(method = "@MixinSquared:Handler", at = @At("RETURN"))
     private static void applyTag(Entity entity, float partialTick, EntityRenderState state, CallbackInfoReturnable<EntityRenderState> cir) {
-        if (!ModConfig.INSTANCE.getNametagCategory().getEnabled()) return;
+        if (!ModConfig.INSTANCE.getNametagCategory().isEnabled()) return;
         state.nameTag = Util.pack(state.nameTag, entity);
         //? if >= 26.1 {
         state.scoreText = Util.pack(state.scoreText, entity);
@@ -43,7 +43,7 @@ public class WorldRendererMixin {
     /*@TargetHandler(mixin = "dev.tr7zw.entityculling.mixin.WorldRendererMixin", name = "renderEntity")
     @WrapOperation(method = "@MixinSquared:Handler", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;getDisplayName()Lnet/minecraft/network/chat/Component;"))
     private Component applyTag(Component component, @Local(argsOnly = true) Entity entity) {
-        if (!ModConfig.INSTANCE.getNametagCategory().getEnabled()) return component;
+        if (!ModConfig.INSTANCE.getNametagCategory().isEnabled()) return component;
         return Util.pack(component, entity);
     }
     *///? }

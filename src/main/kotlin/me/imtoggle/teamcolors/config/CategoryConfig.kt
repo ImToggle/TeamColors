@@ -11,7 +11,7 @@ class CategoryConfig(val id: String) {
     @Switch(
         title = "Enabled"
     )
-    var enabled = false
+    var enabled = true
 
     @PreviewOption
     val preview = PreviewVisualizer.PreviewState(id)
@@ -19,5 +19,7 @@ class CategoryConfig(val id: String) {
     var global = listOf("saturation", "brightness").associateWith { _ -> ConfigEntry() }
 
     var individual = vanillaColors.mapValues { (name, rgb) -> ColorConfig(rgb) }
+
+    fun isEnabled() = ModConfig.enabled && enabled
 
 }

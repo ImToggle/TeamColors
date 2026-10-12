@@ -11,7 +11,7 @@ object PolyHitboxCompat {
 
     fun initialize() {
         HitboxColors.register { context, original ->
-            if (!ModConfig.hitboxCategory.enabled) return@register original
+            if (!ModConfig.hitboxCategory.isEnabled()) return@register original
             if (context.element != HitboxElement.OUTLINE && context.element != HitboxElement.SIDE) return@register original
             if (context.has(HitboxCondition.HOVERED) || context.has(HitboxCondition.IFRAME)) return@register original
             if (!context.entity.hasTeamColor()) return@register original

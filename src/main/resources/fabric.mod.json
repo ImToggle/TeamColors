@@ -21,6 +21,9 @@
         "adapter": "kotlin",
         "value": "me.imtoggle.teamcolors.TeamColors"
       }
+    ],
+    "oneconfig:toggle": [
+      "me.imtoggle.teamcolors.config.MainToggle"
     ]
   },
   "mixins": [

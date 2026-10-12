@@ -8,10 +8,14 @@ import me.imtoggle.teamcolors.util.updateIndividual
 import org.polyfrost.oneconfig.api.config.v1.Config
 import org.polyfrost.oneconfig.api.config.v1.Property
 import org.polyfrost.oneconfig.api.config.v1.Tree
+import org.polyfrost.oneconfig.api.config.v1.annotations.Include
 import org.polyfrost.oneconfig.api.config.v1.collect.impl.OneConfigCollector
 import org.polyfrost.oneconfig.api.config.v1.dsl.category
 
 object ModConfig : Config("teamcolors.json", "/assets/teamcolors/icon.png", "TeamColors", Category.VISUALS) {
+
+    @Include
+    var enabled = false
 
     val hitboxCategory = CategoryConfig("hitbox")
 

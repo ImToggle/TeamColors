@@ -45,7 +45,7 @@ public class EntityRendererMixin {
 
     @Inject(method = EXTRACT, at = @At("TAIL"))
     private void packNametags(CallbackInfo ci, @Local(argsOnly = true, name = "entity") Entity entity, @Local(argsOnly = true) EntityRenderState state) {
-        if (!ModConfig.INSTANCE.getNametagCategory().getEnabled()) return;
+        if (!ModConfig.INSTANCE.getNametagCategory().isEnabled()) return;
         state.nameTag = Util.pack(state.nameTag, entity);
         //? if >= 26.1 {
         state.scoreText = Util.pack(state.scoreText, entity);
@@ -59,7 +59,7 @@ public class EntityRendererMixin {
             at = @At(value = "NEW", target = "(DDDDDDFFF)Lnet/minecraft/client/renderer/entity/state/HitboxRenderState;")
     )
     private HitboxRenderState setHitboxColor(double d, double e, double f, double g, double h, double i, float j, float k, float l, Operation<HitboxRenderState> original, @Local(ordinal = 0, argsOnly = true) Entity entity) {
-        if (ModConfig.INSTANCE.getHitboxCategory().getEnabled()) {
+        if (ModConfig.INSTANCE.getHitboxCategory().isEnabled()) {
             ColorEntry entry = Util.getColorEntry(entity);
             if (entry != null) {
                 PolyColor color = entry.getHitboxColor();
@@ -82,7 +82,7 @@ public class EntityRendererMixin {
             ^///? }
     ) {
         //? if = 1.21.1 {
-        /^if (ModConfig.INSTANCE.getNametagCategory().getEnabled()) {
+        /^if (ModConfig.INSTANCE.getNametagCategory().isEnabled()) {
             component = Util.pack(component, entity);
         }
         ^///? }
@@ -100,7 +100,7 @@ public class EntityRendererMixin {
     /*@WrapOperation(method = "renderNameTag(Lnet/minecraft/world/entity/Entity;Ljava/lang/String;DDDI)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/vertex/BufferBuilder;color(FFFF)Lnet/minecraft/client/render/vertex/BufferBuilder;"))
     private net.minecraft.client.render.vertex.BufferBuilder setNametag(net.minecraft.client.render.vertex.BufferBuilder instance, float r, float g, float b, float a, Operation<net.minecraft.client.render.vertex.BufferBuilder> original, @Local(argsOnly = true) Entity entity) {
         RenderUtil.tagColor = null;
-        if (ModConfig.INSTANCE.getNametagCategory().getEnabled() && Util.hasTeamColor(entity)) {
+        if (ModConfig.INSTANCE.getNametagCategory().isEnabled() && Util.hasTeamColor(entity)) {
             ColorEntry entry = Util.getColorEntry(entity);
             if (entry != null) {
                 PolyColor color = entry.getNametagColor();

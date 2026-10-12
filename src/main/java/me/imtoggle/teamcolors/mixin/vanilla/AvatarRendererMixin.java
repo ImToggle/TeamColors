@@ -16,7 +16,7 @@ public class AvatarRendererMixin {
 
     @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/Avatar;Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;F)V", at = @At("TAIL"))
     private void packNametags(Avatar avatar, AvatarRenderState state, float f, CallbackInfo ci) {
-        if (!ModConfig.INSTANCE.getNametagCategory().getEnabled()) return;
+        if (!ModConfig.INSTANCE.getNametagCategory().isEnabled()) return;
         state.scoreText = Util.pack(state.scoreText, avatar);
     }
 

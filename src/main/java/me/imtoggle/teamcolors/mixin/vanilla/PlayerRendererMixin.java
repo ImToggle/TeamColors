@@ -19,7 +19,7 @@ public class PlayerRendererMixin {
             at = @At("TAIL")
     )
     private void packNametags(AbstractClientPlayer abstractClientPlayer, PlayerRenderState state, float f, CallbackInfo ci) {
-        if (!ModConfig.INSTANCE.getNametagCategory().getEnabled()) return;
+        if (!ModConfig.INSTANCE.getNametagCategory().isEnabled()) return;
         state.scoreText = Util.pack(state.scoreText, abstractClientPlayer);
     }
 }

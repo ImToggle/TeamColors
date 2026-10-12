@@ -92,8 +92,9 @@ dependencies {
 
     modImplementation("net.fabricmc:fabric-loader:$loaderversion")
     modImplementation("org.polyfrost.oneconfig:$mcversion-$loader:$oneconfigversion")
-    modImplementation("maven.modrinth:hitbox:v1.3.2-$loader,$mcversion")
-    modImplementation("maven.modrinth:polynametag:v1.2.2-$loader,$mcversion")
+    modCompileOnly("maven.modrinth:hitbox:v1.3.2-$loader,$mcversion")
+    modCompileOnly("maven.modrinth:polynametag:v1.2.2-$loader,$mcversion")
+    compileOnly("org.polyfrost.oneconfig:mod-toggles:1.0.0")
 
     if (!isOrnithe) {
         val fapiversion: String = sc.properties["deps.fabric_api"]
