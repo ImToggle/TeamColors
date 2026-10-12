@@ -1,4 +1,3 @@
 ## Changes
 
-- Complete menu rework
-- Individual color settings
+- Added OneConfig Mod Toggles API implementation
