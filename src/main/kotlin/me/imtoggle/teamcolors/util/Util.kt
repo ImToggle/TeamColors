@@ -2,6 +2,7 @@
 
 package me.imtoggle.teamcolors.util
 
+import me.imtoggle.teamcolors.config.ModConfig
 import me.imtoggle.teamcolors.data.ColorEntry
 import me.imtoggle.teamcolors.hook.PlayerTeamHook
 import net.minecraft.world.entity.Entity
@@ -24,7 +25,11 @@ fun pack(component: net.minecraft.network.chat.Component?, entity: Entity): net.
 
 fun getFormattingID(prefix: String?): Int {
     if (prefix == null || prefix.length < 2) return -1
-    for (i in prefix.length - 2 downTo 0) {
+    val range = when (ModConfig.prefixMode) {
+        0 -> 0..prefix.length - 2
+        else -> prefix.length - 2 downTo 0
+    }
+    for (i in range) {
         if (prefix[i] == '§') {
             colorCodes.indexOf(prefix[i + 1].lowercaseChar()).let {
                 if (it != -1) return it
@@ -55,4 +60,12 @@ fun String.capitalize() = replaceFirstChar { if (it.isLowerCase()) it.titlecase(
 
 fun String.toTitleCase() = split("_").joinToString(" ") { word ->
     word.lowercase().capitalize()
+}
+
+fun isLegacy(): Boolean {
+    //? if = 1.8.9 {
+    /*return true
+    *///? } else {
+    return false
+    //? }
 }

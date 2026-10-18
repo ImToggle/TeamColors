@@ -1,6 +1,7 @@
 package me.imtoggle.teamcolors.config
 
 import me.imtoggle.teamcolors.util.capitalize
+import me.imtoggle.teamcolors.util.isLegacy
 import me.imtoggle.teamcolors.util.toTitleCase
 import me.imtoggle.teamcolors.util.updateCategory
 import me.imtoggle.teamcolors.util.updateColorMap
@@ -9,6 +10,7 @@ import org.polyfrost.oneconfig.api.config.v1.Config
 import org.polyfrost.oneconfig.api.config.v1.Property
 import org.polyfrost.oneconfig.api.config.v1.Tree
 import org.polyfrost.oneconfig.api.config.v1.annotations.Include
+import org.polyfrost.oneconfig.api.config.v1.annotations.RadioButton
 import org.polyfrost.oneconfig.api.config.v1.collect.impl.OneConfigCollector
 import org.polyfrost.oneconfig.api.config.v1.dsl.category
 
@@ -22,6 +24,14 @@ object ModConfig : Config("teamcolors.json", "/assets/teamcolors/icon.png", "Tea
     val nametagCategory = CategoryConfig("nametag")
 
     var categoriesConfig = listOf(hitboxCategory, nametagCategory)
+
+    @RadioButton(
+        title = "Prefix Color",
+        description = "Available for 1.8.9 only, may require a rejoin after toggling.",
+        category = "Advanced",
+        options = ["First", "Last"]
+    )
+    var prefixMode = 0
 
     private fun handleGroup(
         tree: Tree, collector: OneConfigCollector,
@@ -65,8 +75,9 @@ object ModConfig : Config("teamcolors.json", "/assets/teamcolors/icon.png", "Tea
         }
     }
 
-    override fun makeTree(): Tree? {
-        val tree = super.makeTree()
+    override fun makeTree(): Tree {
+        val original = super.makeTree()
+        val tree = Tree.tree(original.id)
         val collector = OneConfigCollector()
         categoriesConfig.forEach { category ->
             val t = Tree.tree(category.name)
@@ -96,6 +107,7 @@ object ModConfig : Config("teamcolors.json", "/assets/teamcolors/icon.png", "Tea
                 tree.put(node)
             }
         }
+        tree.overwrite(original, true)
         return tree
     }
 
@@ -110,6 +122,13 @@ object ModConfig : Config("teamcolors.json", "/assets/teamcolors/icon.png", "Tea
                 node.onAllProps { _, property ->
                     property.revaluateDisplay()
                 }
+            }
+        }
+        addDependency("prefixMode", null) {
+            return@addDependency if (isLegacy()) {
+                Property.Display.SHOWN
+            } else {
+                Property.Display.DISABLED
             }
         }
     }
