@@ -19,7 +19,7 @@ public class LivingEntityRendererMixin {
 
     @WrapOperation(method = "renderNameTag(Lnet/minecraft/world/entity/LivingEntity;DDD)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/vertex/BufferBuilder;color(FFFF)Lnet/minecraft/client/render/vertex/BufferBuilder;"))
     private net.minecraft.client.render.vertex.BufferBuilder setNametag(net.minecraft.client.render.vertex.BufferBuilder instance, float r, float g, float b, float a, Operation<BufferBuilder> original, @Local(argsOnly = true) LivingEntity entity) {
-        if (ModConfig.INSTANCE.getNametagCategory().isEnabled() && Util.hasTeamColor(entity)) {
+        if (ModConfig.INSTANCE.getNametagCategory().isEnabled()) {
             ColorEntry entry = Util.getColorEntry(entity);
             if (entry != null) {
                 PolyColor color = entry.getNametagColor();

@@ -17,7 +17,7 @@ public class EntityHitboxDebugRendererMixin {
     //~ if < 26.1 'name = "mainColor"' -> 'name = "i"'
     @ModifyVariable(method = "showHitboxes", at = @At("STORE"), name = "mainColor")
     private int setHitboxColor(int mainColor, @Local(argsOnly = true, name = "entity") Entity entity) {
-        if (ModConfig.INSTANCE.getHitboxCategory().isEnabled() && Util.hasTeamColor(entity)) {
+        if (ModConfig.INSTANCE.getHitboxCategory().isEnabled()) {
             ColorEntry entry = Util.getColorEntry(entity);
             if (entry != null) {
                 return entry.getHitboxColor().getArgb() | (mainColor & 0xFF000000);

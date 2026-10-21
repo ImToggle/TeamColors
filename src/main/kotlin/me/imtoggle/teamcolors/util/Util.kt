@@ -14,7 +14,6 @@ var hasPolyNametag = false
 //? if > 1.8.9 {
 fun pack(component: net.minecraft.network.chat.Component?, entity: Entity): net.minecraft.network.chat.Component? {
     val nametag = component ?: return null
-    if (!entity.hasTeamColor()) return component
     val entry = entity.getColorEntry() ?: return component
     return me.imtoggle.teamcolors.data.TagComponent(nametag, entry.nametagColor.argb and 0x00FFFFFF)
 }
@@ -40,20 +39,14 @@ fun getFormattingID(prefix: String?): Int {
 }
 *///? }
 
-fun Entity.hasTeamColor(): Boolean {
-    //? if = 1.8.9 {
-    /*if (this !is LivingEntity) return false
-    val team = scoreboardTeam ?: return false
-    *///? }
-    return (team as? PlayerTeamHook)?.`teamColors$hasColor`() ?: false
-}
-
 fun Entity.getColorEntry(): ColorEntry? {
     //? if = 1.8.9 {
     /*if (this !is LivingEntity) return null
     val team = scoreboardTeam ?: return null
     *///? }
-    return (team as? PlayerTeamHook)?.`teamColors$getColorEntry`()
+    val entry = (team as? PlayerTeamHook)?.`teamColors$getColorEntry`() ?: return null
+    if (!entry.enabled) return null
+    return entry
 }
 
 fun String.capitalize() = replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }

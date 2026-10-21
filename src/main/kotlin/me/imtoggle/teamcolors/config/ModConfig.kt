@@ -2,6 +2,7 @@ package me.imtoggle.teamcolors.config
 
 import me.imtoggle.teamcolors.util.capitalize
 import me.imtoggle.teamcolors.util.isLegacy
+import me.imtoggle.teamcolors.util.refreshList
 import me.imtoggle.teamcolors.util.toTitleCase
 import me.imtoggle.teamcolors.util.updateCategory
 import me.imtoggle.teamcolors.util.updateColorMap
@@ -24,6 +25,13 @@ object ModConfig : Config("teamcolors.json", "/assets/teamcolors/icon.png", "Tea
     val nametagCategory = CategoryConfig("nametag")
 
     var categoriesConfig = listOf(hitboxCategory, nametagCategory)
+
+    @TeamList(
+        title = "Blacklist",
+        description = "Exclude teams",
+        category = "Advanced"
+    )
+    var blacklist = emptyArray<String>()
 
     @RadioButton(
         title = "Prefix Color",
@@ -114,6 +122,7 @@ object ModConfig : Config("teamcolors.json", "/assets/teamcolors/icon.png", "Tea
     override fun initialize(byConfigManager: Boolean) {
         super.initialize(byConfigManager)
         updateColorMap()
+        refreshList()
         categoriesConfig.forEach { config ->
             config.preview.currentColor = null
         }
@@ -130,6 +139,9 @@ object ModConfig : Config("teamcolors.json", "/assets/teamcolors/icon.png", "Tea
             } else {
                 Property.Display.DISABLED
             }
+        }
+        addCallback("blacklist") {
+            refreshList()
         }
     }
 

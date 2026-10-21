@@ -7,6 +7,8 @@ import org.polyfrost.compose.render.PolyColor
 
 class ColorEntry {
 
+    var enabled = true
+
     var hitboxColor by mutableStateOf(PolyColor())
 
     var nametagColor by mutableStateOf(PolyColor())

@@ -18,7 +18,7 @@ class CategoryConfig(val id: String) {
 
     var global = listOf("saturation", "brightness").associateWith { _ -> ConfigEntry() }
 
-    var individual = vanillaColors.mapValues { (name, rgb) -> ColorConfig(rgb) }
+    var individual = vanillaColors.mapValues { (_, rgb) -> ColorConfig(rgb) }
 
     fun isEnabled() = ModConfig.enabled && enabled
 

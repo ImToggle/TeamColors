@@ -32,6 +32,12 @@ val legacyColors: IntArray
     }
 *///? }
 
+fun refreshList() {
+    vanillaColors.forEach { (id, color) ->
+        colorMap[color]?.enabled = !ModConfig.blacklist.contains(id)
+    }
+}
+
 fun updateColorMap() {
     ModConfig.categoriesConfig.forEach { category ->
         updateCategory(category)

@@ -27,7 +27,7 @@ public class EntityRenderDispatcherMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;renderHitbox(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lnet/minecraft/world/entity/Entity;FFFF)V")
     )
     private void setHitboxColor(PoseStack poseStack, VertexConsumer vertexConsumer, Entity entity, float f, float g, float h, float i, Operation<Void> original) {
-        if (ModConfig.INSTANCE.getHitboxCategory().isEnabled() && Util.hasTeamColor(entity)) {
+        if (ModConfig.INSTANCE.getHitboxCategory().isEnabled()) {
             ColorEntry entry = Util.getColorEntry(entity);
             if (entry != null) {
                 PolyColor color = entry.getHitboxColor();
@@ -43,7 +43,7 @@ public class EntityRenderDispatcherMixin {
             ordinal = 0
     ))
     private static void setHitboxColor(PoseStack poseStack, VertexConsumer vertexConsumer, net.minecraft.world.phys.AABB aabb, float r, float g, float b, float a, Operation<Void> original, @com.llamalad7.mixinextras.sugar.Local(argsOnly = true) Entity entity) {
-        if (ModConfig.INSTANCE.getHitboxCategory().isEnabled() && Util.hasTeamColor(entity)) {
+        if (ModConfig.INSTANCE.getHitboxCategory().isEnabled()) {
             ColorEntry entry = Util.getColorEntry(entity);
             if (entry != null) {
                 PolyColor color = entry.getHitboxColor();
@@ -59,7 +59,7 @@ public class EntityRenderDispatcherMixin {
             ordinal = 0
     ))
     private static void setHitboxColor(Box shape, int r, int g, int b, int a, Operation<Void> original, @com.llamalad7.mixinextras.sugar.Local(argsOnly = true) Entity entity) {
-        if (ModConfig.INSTANCE.getHitboxCategory().isEnabled() && Util.hasTeamColor(entity)) {
+        if (ModConfig.INSTANCE.getHitboxCategory().isEnabled()) {
             ColorEntry entry = Util.getColorEntry(entity);
             if (entry != null) {
                 PolyColor color = entry.getHitboxColor();
