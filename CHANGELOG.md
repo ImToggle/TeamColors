@@ -1,3 +1,3 @@
 ## Changes
 
-- Added "Prefix Color" option for Ornithe 1.8.9
+- Added "Blacklist" option to exclude certain teams
