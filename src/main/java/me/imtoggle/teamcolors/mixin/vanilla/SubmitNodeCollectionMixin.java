@@ -27,7 +27,7 @@ public class SubmitNodeCollectionMixin {
 
     //? if >= 26.3 {
     @WrapOperation(method = "submitNameTag", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/SubmitNodeCollection;nameTag(Lorg/joml/Matrix4f;FFLnet/minecraft/util/FormattedCharSequence;IIILnet/minecraft/client/gui/Font$DisplayMode;)Lnet/minecraft/client/renderer/feature/TextFeatureRenderer$Submit;"))
-    private TextFeatureRenderer.Submit setNametagColor(Matrix4f matrix4f, float x, float y, FormattedCharSequence formattedCharSequence, int lightCoords, int color, int backgroundColor, Font.DisplayMode displayMode, Operation<TextFeatureRenderer.Submit> original, @Local(argsOnly = true, name = "name") Component name) {
+    private TextFeatureRenderer.Submit setNametagColor(Matrix4f matrix4f, float x, float y, FormattedCharSequence formattedCharSequence, int lightCoords, int color, int backgroundColor, Font.DisplayMode displayMode, Operation<TextFeatureRenderer.Submit> original, @Local(argsOnly = true) Component name) {
         RenderUtil.tagColor = null;
         if (name instanceof TagComponent tagComponent) {
             RenderUtil.tagColor = tagComponent.getNametagColor();

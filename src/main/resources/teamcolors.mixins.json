@@ -2,6 +2,7 @@
   "required": true,
   "compatibilityLevel": "JAVA_21",
   "package": "me.imtoggle.teamcolors.mixin",
+  "refmap": "mixins.teamcolors.refmap.json",
   "plugin": "me.imtoggle.teamcolors.plugin.TeamColorsMixinPlugin",
   "injectors": {
     "defaultRequire": 1

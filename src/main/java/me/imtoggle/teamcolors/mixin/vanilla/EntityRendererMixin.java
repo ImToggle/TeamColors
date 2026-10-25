@@ -44,7 +44,7 @@ public class EntityRendererMixin {
             *///? }
 
     @Inject(method = EXTRACT, at = @At("TAIL"))
-    private void packNametags(CallbackInfo ci, @Local(argsOnly = true, name = "entity") Entity entity, @Local(argsOnly = true) EntityRenderState state) {
+    private void packNametags(CallbackInfo ci, @Local(argsOnly = true) Entity entity, @Local(argsOnly = true) EntityRenderState state) {
         if (!ModConfig.INSTANCE.getNametagCategory().isEnabled()) return;
         state.nameTag = Util.pack(state.nameTag, entity);
         //? if >= 26.1 {

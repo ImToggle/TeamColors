@@ -14,9 +14,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(EntityHitboxDebugRenderer.class)
 public class EntityHitboxDebugRendererMixin {
 
-    //~ if < 26.1 'name = "mainColor"' -> 'name = "i"'
-    @ModifyVariable(method = "showHitboxes", at = @At("STORE"), name = "mainColor")
-    private int setHitboxColor(int mainColor, @Local(argsOnly = true, name = "entity") Entity entity) {
+    @ModifyVariable(method = "showHitboxes", at = @At("STORE"), ordinal = 0)
+    private int setHitboxColor(int mainColor, @Local(argsOnly = true) Entity entity) {
         if (ModConfig.INSTANCE.getHitboxCategory().isEnabled()) {
             ColorEntry entry = Util.getColorEntry(entity);
             if (entry != null) {
