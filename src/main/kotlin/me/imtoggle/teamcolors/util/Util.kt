@@ -54,11 +54,3 @@ fun String.capitalize() = replaceFirstChar { if (it.isLowerCase()) it.titlecase(
 fun String.toTitleCase() = split("_").joinToString(" ") { word ->
     word.lowercase().capitalize()
 }
-
-fun isLegacy(): Boolean {
-    //? if = 1.8.9 {
-    /*return true
-    *///? } else {
-    return false
-    //? }
-}

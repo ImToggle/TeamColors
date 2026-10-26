@@ -1,7 +1,6 @@
 package me.imtoggle.teamcolors.config
 
 import me.imtoggle.teamcolors.util.capitalize
-import me.imtoggle.teamcolors.util.isLegacy
 import me.imtoggle.teamcolors.util.refreshList
 import me.imtoggle.teamcolors.util.toTitleCase
 import me.imtoggle.teamcolors.util.updateCategory
@@ -33,13 +32,15 @@ object ModConfig : Config("teamcolors.json", "/assets/teamcolors/icon.png", "Tea
     )
     var blacklist = emptyArray<String>()
 
-    @RadioButton(
+    //? if = 1.8.9 {
+    /*@RadioButton(
         title = "Prefix Color",
-        description = "Available for 1.8.9 only, may require a rejoin after toggling.",
+        description = "May require a rejoin after toggling.",
         category = "Advanced",
         options = ["First", "Last"]
     )
     var prefixMode = 0
+    *///? }
 
     private fun handleGroup(
         tree: Tree, collector: OneConfigCollector,
@@ -131,13 +132,6 @@ object ModConfig : Config("teamcolors.json", "/assets/teamcolors/icon.png", "Tea
                 node.onAllProps { _, property ->
                     property.revaluateDisplay()
                 }
-            }
-        }
-        addDependency("prefixMode", null) {
-            return@addDependency if (isLegacy()) {
-                Property.Display.SHOWN
-            } else {
-                Property.Display.DISABLED
             }
         }
         addCallback("blacklist") {
