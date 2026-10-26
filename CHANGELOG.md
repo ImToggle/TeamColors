@@ -1,3 +1,4 @@
 ## Changes
 
-- Added "Blacklist" option to exclude certain teams
+- Fixed mixins crashing under 26.x
+- Removes "Prefix Color" option from modern versions
