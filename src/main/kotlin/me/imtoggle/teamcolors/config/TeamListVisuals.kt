@@ -1,3 +1,5 @@
+@file:OptIn(org.polyfrost.oneconfig.api.ui.v1.ExperimentalOneConfigUiApi::class)
+
 package me.imtoggle.teamcolors.config
 
 import androidx.compose.foundation.background
@@ -18,7 +20,7 @@ import org.polyfrost.oneconfig.internal.ui.api.settings.TileListOptionData
 import org.polyfrost.oneconfig.internal.ui.components.picker.PickerEntry
 import org.polyfrost.oneconfig.internal.ui.components.picker.PickerTileIcon
 import org.polyfrost.oneconfig.internal.ui.components.settings.TileListOption
-import org.polyfrost.oneconfig.internal.ui.themes.LocalTheme
+import org.polyfrost.oneconfig.api.ui.v1.theme.OneConfigTheme
 
 private data class Swatch(override val id: String, override val displayName: String, val color: Color) : PickerEntry
 
@@ -35,7 +37,7 @@ private val SwatchIcon: PickerTileIcon<Swatch> = { swatch, modifier, alpha ->
             .alpha(alpha)
             .clip(SwatchShape)
             .background(swatch.color, SwatchShape)
-            .border(1.dp, LocalTheme.current.borderColor, SwatchShape)
+            .border(1.dp, OneConfigTheme.current.borderColor, SwatchShape)
     )
 }
 

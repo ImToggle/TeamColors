@@ -1,3 +1,5 @@
+@file:OptIn(org.polyfrost.oneconfig.api.ui.v1.ExperimentalOneConfigUiApi::class)
+
 package me.imtoggle.teamcolors.config
 
 import androidx.compose.animation.animateColorAsState
@@ -30,10 +32,10 @@ import me.imtoggle.teamcolors.util.vanillaColors
 import org.polyfrost.oneconfig.api.config.v1.Property
 import org.polyfrost.oneconfig.api.config.v1.Tree
 import org.polyfrost.oneconfig.api.config.v1.Visualizer
-import org.polyfrost.oneconfig.internal.ui.components.Icon
-import org.polyfrost.oneconfig.internal.ui.components.onClick
-import org.polyfrost.oneconfig.internal.ui.components.rememberInteractionSource
-import org.polyfrost.oneconfig.internal.ui.themes.LocalTheme
+import org.polyfrost.oneconfig.api.ui.v1.components.Icon
+import org.polyfrost.oneconfig.api.ui.v1.components.onClick
+import org.polyfrost.oneconfig.api.ui.v1.components.rememberInteractionSource
+import org.polyfrost.oneconfig.api.ui.v1.theme.OneConfigTheme
 
 class PreviewVisualizer : Visualizer {
 
@@ -76,9 +78,10 @@ class PreviewVisualizer : Visualizer {
                         contentAlignment = Alignment.Center
                     ) {
                         val isHovered by interactionSource.collectIsHoveredAsState()
-                        val color = if (isHovered) LocalTheme.current.textColor else LocalTheme.current.textColorSecondary
+                        val color = if (isHovered) OneConfigTheme.current.textColor else OneConfigTheme.current.textColorSecondary
                         Icon("undo",
-                            color = color,
+                            contentDescription = null,
+                            tint = color,
                             modifier = Modifier.size(16.dp)
                         )
                     }
@@ -92,14 +95,14 @@ class PreviewVisualizer : Visualizer {
                     val isSelected = vanillaRGB == selectedColor
                     val bgColor by animateColorAsState(
                         when {
-                            isSelected -> LocalTheme.current.chipBackground
-                            isHovered -> LocalTheme.current.modCardBackground
-                            else -> LocalTheme.current.modCardBackground.copy(alpha = 0f)
+                            isSelected -> OneConfigTheme.current.chipBackground
+                            isHovered -> OneConfigTheme.current.modCardBackground
+                            else -> OneConfigTheme.current.modCardBackground.copy(alpha = 0f)
                         }
                     )
                     Column(
                         modifier = Modifier
-                            .background(bgColor, shape = LocalTheme.current.sideBarNavigationEntryShape)
+                            .background(bgColor, shape = OneConfigTheme.current.sideBarNavigationEntryShape)
                             .width(40.dp).height(72.dp)
                             .pointerHoverIcon(PointerIcon.Hand)
                             .onClick(interactionSource = interactionSource) {
@@ -138,12 +141,12 @@ class PreviewVisualizer : Visualizer {
                                     .size(24.dp)
                                     .background(
                                         color = color,
-                                        shape = LocalTheme.current.sideBarNavigationEntryShape
+                                        shape = OneConfigTheme.current.sideBarNavigationEntryShape
                                     )
                                     .border(
                                         width = 1.dp,
-                                        color = LocalTheme.current.borderColor,
-                                        shape = LocalTheme.current.sideBarNavigationEntryShape
+                                        color = OneConfigTheme.current.borderColor,
+                                        shape = OneConfigTheme.current.sideBarNavigationEntryShape
                                     )
                             )
                         }
