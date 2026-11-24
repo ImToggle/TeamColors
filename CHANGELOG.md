@@ -1,4 +1,3 @@
 ## Changes
 
-- Fixed mixins crashing under 26.x
-- Removes "Prefix Color" option from modern versions
+- Fixed config menu breaking on newer oneconfig - by saadndm
